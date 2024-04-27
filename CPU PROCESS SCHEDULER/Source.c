@@ -18,7 +18,7 @@ typedef struct {
     int cpu_rate;
 } Process;
 
-// Function prototypes
+// Functions
 void readProcesses(const char* filename, Process processes[], int* count);
 void scheduleProcesses(Process processes[], int count);
 void fcfsAlgorithm();
@@ -28,9 +28,10 @@ void checkResources();
 void assignToCPU1(Process* process);
 void assignToCPU2(Process* process);
 void printOutputFile();
-// ... (Other function prototypes)
+// þimdilik bunlar var
 
 int main(int argc, char* argv[]) {
+
     if (argc != 2) {
         printf("Usage: %s <input_file>\n", argv[0]);
         return 1;
@@ -42,7 +43,7 @@ int main(int argc, char* argv[]) {
     readProcesses(argv[1], processes, &count);
     scheduleProcesses(processes, count);
 
-    // ... (Additional code)
+    // buraya örnek kod yazdýrdým
 
     return 0;
 }
@@ -65,7 +66,7 @@ void scheduleProcesses(Process processes[], int count) {
     // ... (Scheduling code using FCFS, SJF, and Round Robin algorithms)
 }
 
-// ... (Other functions)
+
 void fcfsAlgorithm() {};
 void sjfAlgorithm() {};
 void roundRobinAlgorithm(int quantum_time) {};
