@@ -1,6 +1,10 @@
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <string>
+#include <iostream>
+
 
 #define MAX_PROCESSES 25
 #define RAM_SIZE 2048
@@ -18,9 +22,12 @@ typedef struct {
     int cpu_rate;
 } Process;
 
+
+
+
 // Functions
-void readProcesses(const char* filename, Process processes[], int* count);
-void scheduleProcesses(Process processes[], int count);
+int readAndSchedule(char* filename);
+void scheduleProcesses(char processName[], int priority, int arrivalTime, int burstTime, int memoryRequired, int deadline, int count);
 void fcfsAlgorithm();
 void sjfAlgorithm();
 void roundRobinAlgorithm(int quantum_time);
@@ -40,29 +47,49 @@ int main(int argc, char* argv[]) {
     Process processes[MAX_PROCESSES];
     int count = 0;
 
-    readProcesses(argv[1], processes, &count);
+    readAndSchedule("input.txt");
     scheduleProcesses(processes, count);
 
-    // buraya örnek kod yazdýrdým
+    
 
     return 0;
 }
 
+
+
 // Function to read processes from file
-void readProcesses(const char* filename, Process processes[], int* count) {
-    FILE* file = fopen(filename, "r");
-    if (!file) {
-        perror("Error opening file");
-        exit(1);
+int readAndSchedule(char* filename) {
+
+    FILE* fp = fopen(filename, "r");
+
+    if (fp == NULL) {
+        printf("Error opening file: %s\n", filename);
+        return 1;
     }
 
-    // ... (Code to read and store processes)
+    char line[100]; // Adjust buffer size based on expected line length
 
-    fclose(file);
+    while (fgets(line, sizeof(line), fp) != NULL) {
+        // Extract data from the line
+        char* processName[2] = strtok(line, ",");
+        int priority = atoi(strtok(NULL, ","));
+        int arrivalTime = atoi(strtok(NULL, ","));
+        int burstTime = atoi(strtok(NULL, ","));
+        int memoryRequired = atoi(strtok(NULL, ","));
+        int deadline = atoi(strtok(NULL, ","));
+
+        printf(priority);
+
+        // Call scheduleProcesses with extracted data
+        scheduleProcesses(processName, priority, arrivalTime, burstTime, memoryRequired, deadline, 0);
+    }
+
+    fclose(fp);
+    return 0;
 }
 
 // Function to schedule processes
-void scheduleProcesses(Process processes[], int count) {
+void scheduleProcesses(char processName[], int priority, int arrivalTime, int burstTime, int memoryRequired, int deadline, int count) {
     // ... (Scheduling code using FCFS, SJF, and Round Robin algorithms)
 }
 
