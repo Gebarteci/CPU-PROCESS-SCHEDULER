@@ -48,7 +48,7 @@ int main(int argc, char* argv[]) {
     int count = 0;
 
     readAndSchedule("input.txt");
-    scheduleProcesses(processes, count);
+    
 
     
 
@@ -78,7 +78,7 @@ int readAndSchedule(char* filename) {
         int memoryRequired = atoi(strtok(NULL, ","));
         int deadline = atoi(strtok(NULL, ","));
 
-        printf(priority);
+        printf(priority);//deneme için
 
         // Call scheduleProcesses with extracted data
         scheduleProcesses(processName, priority, arrivalTime, burstTime, memoryRequired, deadline, 0);
