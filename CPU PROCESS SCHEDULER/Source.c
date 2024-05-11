@@ -23,7 +23,7 @@ typedef struct {
 
 
 // Functions
-int readAndSchedule(char* filename);
+int readFile(char* filename);
 void scheduleProcesses(char processName[], int priority, int arrivalTime, int burstTime, int memoryRequired, int deadline, int count);
 void fcfsAlgorithm();
 void sjfAlgorithm();
@@ -36,17 +36,15 @@ void printOutputFile();
 
 int main(int argc, char* argv[]) {
 
-    if (argc != 2) {
-        printf("Usage: %s <input_file>\n", argv[0]);
-        return 1;
-    }//bu kısım sıkıntı yaratıyor 
-
+   
     printf("yessir");
 
     Process processes[MAX_PROCESSES];
     int count = 0;
 
-    readAndSchedule("input.txt");
+    readFile("input.txt");
+
+    
     
 
     
@@ -57,7 +55,7 @@ int main(int argc, char* argv[]) {
 
 
 // Function to read processes from file
-int readAndSchedule(char* filename) {
+int readFile(char* filename) {
 
     FILE* fp = fopen(filename, "r");
 
@@ -68,7 +66,7 @@ int readAndSchedule(char* filename) {
 
     char line[100]; // input uzunluguna gore ayarlanir
 
-    while (fgets(line, sizeof(line), fp) != NULL) {
+    while (fgets(line, sizeof(line), fp) != NULL && line > 2) {
         
         char processName[2];
         char* token = strtok(line, ",");
@@ -82,19 +80,20 @@ int readAndSchedule(char* filename) {
         int memoryRequired = atoi(strtok(NULL, ","));
         int deadline = atoi(strtok(NULL, ","));
 
+
+        
         printf("%d", priority);//deneme icin
 
         
 
-
-        scheduleProcesses(processName, priority, arrivalTime, burstTime, memoryRequired, deadline, 0);
+        //scheduleProcesses(processName, priority, arrivalTime, burstTime, memoryRequired, deadline, 0);
     }
 
     fclose(fp);
     return 0;
 }
 
-/
+
 
 void scheduleProcesses(char processName[], int priority, int arrivalTime, int burstTime, int memoryRequired, int deadline, int count) {
     //Scheduling code using FCFS, SJF, and Round Robin algorithms
