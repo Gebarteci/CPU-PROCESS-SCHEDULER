@@ -19,12 +19,14 @@ typedef struct {
     int cpu_rate;
 } Process;
 
+Process processes[MAX_PROCESSES];
+
 
 
 
 // Functions
 int readFile(char* filename);
-void scheduleProcesses(char processName[], int priority, int arrivalTime, int burstTime, int memoryRequired, int deadline, int count);
+void scheduleProcesses();
 void fcfsAlgorithm();
 void sjfAlgorithm();
 void roundRobinAlgorithm(int quantum_time);
@@ -39,11 +41,12 @@ int main(int argc, char* argv[]) {
    
     printf("yessir");
 
-    Process processes[MAX_PROCESSES];
+   
     int count = 0;
 
     readFile("input.txt");
 
+    scheduleProcesses();
     
     
 
@@ -57,6 +60,8 @@ int main(int argc, char* argv[]) {
 // Function to read processes from file
 int readFile(char* filename) {
 
+    int n = 0; //for assigning the variables into processes[]
+
     FILE* fp = fopen(filename, "r");
 
     if (fp == NULL) {
@@ -66,36 +71,61 @@ int readFile(char* filename) {
 
     char line[100]; // input uzunluguna gore ayarlanir
 
-    while (fgets(line, sizeof(line), fp) != NULL && line > 2) {
+    while (fgets(line, sizeof(line), fp) != NULL) {
         
-        char processName[2];
+        if (n == -1) {
+            n++;
+            continue;
+        }
+
+        char processName[2]; //ilk elemanı doğru okumuyor
         char* token = strtok(line, ",");
         if (token != NULL) {
             strncpy(processName, token, sizeof(processName) - 1);
             processName[sizeof(processName) - 1] = '\0'; // Ensure null termination????????
         }
-        int priority = atoi(strtok(NULL, ","));
+        
         int arrivalTime = atoi(strtok(NULL, ","));
+        int priority = atoi(strtok(NULL, ","));
         int burstTime = atoi(strtok(NULL, ","));
         int memoryRequired = atoi(strtok(NULL, ","));
-        int deadline = atoi(strtok(NULL, ","));
+        int cpu = atoi(strtok(NULL, ","));
+
+
+        for (int i = 0; i < 2; i++) {
+            processes[n].process_id[i] = processName[i]; // Format process ID as P1, P2, etc.
+        }
+        processes[n].arrival_time = arrivalTime;
+        processes[n].priority = priority;
+        processes[n].burst_time = burstTime;
+        processes[n].ram = memoryRequired;
+        processes[n].cpu_rate = cpu;
+
+           
+        
 
 
         
-        printf("%d", priority);//deneme icin
+        //printf("%d", cpu); //deneme icin
 
+       /* for (int i = 0; i < 2; ++i) {
+            printf("processName[%d] = %c\n", i, processName[i]);
+        }*/
         
 
-        //scheduleProcesses(processName, priority, arrivalTime, burstTime, memoryRequired, deadline, 0);
+        
     }
 
     fclose(fp);
+
     return 0;
 }
 
 
 
-void scheduleProcesses(char processName[], int priority, int arrivalTime, int burstTime, int memoryRequired, int deadline, int count) {
+void scheduleProcesses() {
+
+    processes[1];
     //Scheduling code using FCFS, SJF, and Round Robin algorithms
 }
 
