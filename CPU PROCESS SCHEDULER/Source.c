@@ -85,28 +85,24 @@ int readFile(char* filename) {
             processName[sizeof(processName) - 1] = '\0'; // Ensure null termination????????
         }
         
-        int arrivalTime = atoi(strtok(NULL, ","));
-        int priority = atoi(strtok(NULL, ","));
-        int burstTime = atoi(strtok(NULL, ","));
-        int memoryRequired = atoi(strtok(NULL, ","));
-        int cpu = atoi(strtok(NULL, ","));
+        processes[n].arrival_time = atoi(strtok(NULL, ","));
+        processes[n].priority = atoi(strtok(NULL, ","));
+        processes[n].burst_time = atoi(strtok(NULL, ","));
+        processes[n].ram = atoi(strtok(NULL, ","));
+        processes[n].cpu_rate = atoi(strtok(NULL, ","));
 
 
         for (int i = 0; i < 2; i++) {
             processes[n].process_id[i] = processName[i]; // Format process ID as P1, P2, etc.
         }
-        processes[n].arrival_time = arrivalTime;
-        processes[n].priority = priority;
-        processes[n].burst_time = burstTime;
-        processes[n].ram = memoryRequired;
-        processes[n].cpu_rate = cpu;
+         
 
            
         
 
 
         
-        //printf("%d", cpu); //deneme icin
+        printf("%d", processes[n].cpu_rate); //deneme icin
 
        /* for (int i = 0; i < 2; ++i) {
             printf("processName[%d] = %c\n", i, processName[i]);
