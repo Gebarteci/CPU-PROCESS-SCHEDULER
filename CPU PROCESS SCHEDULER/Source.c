@@ -12,8 +12,10 @@
 #define MAX_CPU0 100
 #define MAX_CPU1 100
 
+int count = 0; //clock
 
-// c =current
+
+// c = current
 int cProcesses, cUser, cHigh, cCPU0,cCPU1 = 0;
 int cRam;
 
@@ -27,6 +29,7 @@ typedef struct {
     int burst_time;
     int ram;
     int cpu_rate;
+    int p_time; //processed time
 } Process;
 
 Process processes[MAX_PROCESSES];
@@ -49,18 +52,18 @@ void printOutputFile();
 
 int main(int argc, char* argv[]) {
 
-   
     
-
-   
-    int count = 0;
     
-
-
+    
     readFile("input.txt");
 
-    scheduleProcesses();
-    
+
+    while (1) {
+
+        scheduleProcesses();
+
+        count++;
+    }
     
 
     
@@ -75,10 +78,12 @@ void checkResources(Process process) {
         if (cHigh + process.ram <= HIGH_PRIORITY_RAM && cCPU0 + process.cpu_rate <= MAX_CPU0) {
             cHigh = cHigh + process.ram;
             cCPU0 = cCPU0 + process.cpu_rate;
+            return 1;
         }
         else {
             printf("resources are not enough");
 
+            return 0;
         }
 
     }
@@ -87,9 +92,11 @@ void checkResources(Process process) {
         if (cUser + process.ram <= USER_PROCESS_RAM && cCPU1 + process.cpu_rate <= MAX_CPU1) {
             cUser = cUser + process.ram;
             cCPU1 = cCPU1 + process.cpu_rate;
+            return 1;
         }
         else {
             printf("resources are not enough");
+            return 0;
         }
 
     }
@@ -132,6 +139,7 @@ int readFile(char* filename) {
         processes[n].burst_time = atoi(strtok(NULL, ","));
         processes[n].ram = atoi(strtok(NULL, ","));
         processes[n].cpu_rate = atoi(strtok(NULL, ","));
+        processes[n].p_time = 0;
 
 
         for (int i = 0; i < 2; i++) {
@@ -153,6 +161,7 @@ int readFile(char* filename) {
 
         
     }
+     
 
     fclose(fp);
 
@@ -165,23 +174,29 @@ void scheduleProcesses() {
 
     for (int i = 0; i <= n; i++) {
 
-        switch (processes[i].priority)
-        {
-        case 0:
-            fcfsAlgorithm(processes[i]);
-            break;
-        case 1:
-            sjfAlgorithm(processes[i]);
-            break;
-        case 2:
-            roundRobinAlgorithm(processes[i], QUANTUM_TIME_2);
-            break;
-        case 3:
-            roundRobinAlgorithm(processes[i], QUANTUM_TIME_3);
-            break;
-        default:
-            break;
+        if (processes[i].arrival_time = count) {
+
+            switch (processes[i].priority)
+            {
+            case 0:
+                fcfsAlgorithm(processes[i]);
+                break;
+            case 1:
+                sjfAlgorithm(processes[i]);
+                break;
+            case 2:
+                roundRobinAlgorithm(processes[i], QUANTUM_TIME_2);
+                break;
+            case 3:
+                roundRobinAlgorithm(processes[i], QUANTUM_TIME_3);
+                break;
+            default:
+                break;
+            }
+
         }
+
+
     }
     
     //Scheduling code using FCFS, SJF, and Round Robin algorithms
