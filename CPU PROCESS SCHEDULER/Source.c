@@ -2,9 +2,9 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include<stdbool.h>
+#include <stdbool.h>
 
-#define MAX_PROCESSES 25
+#define MAX_PROCESSES 26
 #define RAM_SIZE 2048
 #define HIGH_PRIORITY_RAM 512
 #define USER_PROCESS_RAM (RAM_SIZE - HIGH_PRIORITY_RAM)
@@ -13,7 +13,9 @@
 #define MAX_CPU0 100
 #define MAX_CPU1 100
 
-int count = 0; //clock,milisecond
+int count = 0; //ms clock
+
+static int am = 0;
 
 
 // c = current
@@ -35,6 +37,10 @@ typedef struct {
 
 Process processes[MAX_PROCESSES];
 int n = 0; //Process number,for assigning the variables into processes[]
+
+Process one;
+Process two;
+
 
 // Structure for a queue node
 typedef struct Node {
@@ -81,11 +87,14 @@ int main(int argc, char* argv[]) {
     initializeQueue(&q_rr8);
     initializeQueue(&q_rr16);
 
+    one.burst_time = 0;
+    two.burst_time = 0;
+
     
     readFile("input.txt");
 
 
-    while (count<20) {
+    while (count<80) {
 
         
         scheduleProcesses();
@@ -304,7 +313,7 @@ void sjfAlgorithm(Queue* queue) {
     int n = 0; // Number of elements in the queue (can be calculated dynamically)
     Node* current, * min, * temp;
 
-    // Count the number of elements in the queue (optional)
+    // Count the number of elements in the queue 
     current = queue->front;
     while (current != NULL) {
         n++;
@@ -314,6 +323,7 @@ void sjfAlgorithm(Queue* queue) {
     // Selection Sort implementation
     for (int i = 0; i < n - 1; i++) {
         min = &queue->front[i];
+
         for (int j = i + 1; j < n; j++) {
             temp = &queue->front[j];
             if (temp->data.burst_time < min->data.burst_time) {
@@ -335,9 +345,41 @@ void roundRobinAlgorithm(Process process,int quantum_time) {
 
 
 
-void CPU1() {};
-void CPU2() {};
+void CPU1() {
+    
+    if (one.burst_time != 0) {
+        
+        one.burst_time--; //completing 1ms of process
+
+        if (one.burst_time == 0 && isEmpty(&q_fcfs) == 0) {
+
+            printf("Process %d is completed and terminated in CPU1.\n\n", one.process_id[0]);
+            
+            am++;
+            printf("%d \n", am);
+            cHigh = cHigh - one.ram;
+            cCPU0 = cCPU0 - one.cpu_rate;
+
+            one = dequeue(&q_fcfs);
+
+        }
+    }
+    else {
+
+        if (isEmpty(&q_fcfs) == 0) {
+            one = dequeue(&q_fcfs);//for first assignment
+        }
+    }
+
+};
+
+void CPU2() {
+
+
+};
 void printOutputFile() {};
+
+
 
 //-------------------------queue functions
 
