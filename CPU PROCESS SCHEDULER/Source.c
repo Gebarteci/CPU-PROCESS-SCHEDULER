@@ -66,7 +66,7 @@ void displayQueue(Queue* queue);
 int readFile(char* filename);
 void scheduleProcesses();
 void fcfsAlgorithm(Process process);
-void sjfAlgorithm(Process process);
+void sjfAlgorithm(Queue* queue);
 void roundRobinAlgorithm(Process process, int quantum_time);
 bool checkResources(Process process);
 void CPU1();
@@ -85,7 +85,7 @@ int main(int argc, char* argv[]) {
     readFile("input.txt");
 
 
-    while (1) {
+    while (count<20) {
 
         
         scheduleProcesses();
@@ -170,7 +170,7 @@ int readFile(char* filename) {
         processes[n].burst_time = atoi(strtok(NULL, ","));
         processes[n].ram = atoi(strtok(NULL, ","));
         processes[n].cpu_rate = atoi(strtok(NULL, ","));
-        processes[n].r_time = 0;
+        processes[n].r_time = processes[n].burst_time;
 
 
         for (int i = 0; i < 2; i++) {
@@ -227,16 +227,55 @@ void scheduleProcesses() {
                     printf("arrival time delayed\n\n");
                 }
 
-                //fcfsAlgorithm(processes[i]);
+                
                 break;
             case 1:
-                sjfAlgorithm(processes[i]);
+                if (checkResources(processes[i]) == 1) {
+
+                    printf("sjf\n");
+                    cUser = cUser + processes[i].ram;
+                    cCPU1 = cCPU1 + processes[i].cpu_rate;
+
+                    enqueue(&q_sjf, processes[i]);
+                    printf("Process %d is queued to be assigned to CPU-2.\n\n", processes[i].process_id[0]);
+                }
+                else {
+                    processes[i].arrival_time++;
+                    printf("sjf\n");
+                    printf("arrival time delayed\n\n");
+                }
                 break;
             case 2:
-                roundRobinAlgorithm(processes[i], QUANTUM_TIME_2);
+                if (checkResources(processes[i]) == 1) {
+                    printf("robin8\n");
+                    cUser = cUser + processes[i].ram;
+                    cCPU1 = cCPU1 + processes[i].cpu_rate;
+
+                    enqueue(&q_rr8, processes[i]);
+                    printf("Process %d is queued to be assigned to CPU-2.\n\n", processes[i].process_id[0]);
+                }
+                else {
+                    processes[i].arrival_time++;
+                    printf("robin8\n");
+                    printf("arrival time delayed\n\n");
+                }
                 break;
             case 3:
-                roundRobinAlgorithm(processes[i], QUANTUM_TIME_3);
+
+                if (checkResources(processes[i]) == 1) {
+                    printf("robin16\n");
+                    cUser = cUser + processes[i].ram;
+                    cCPU1 = cCPU1 + processes[i].cpu_rate;
+
+                    enqueue(&q_rr16, processes[i]);
+                    printf("Process %d is queued to be assigned to CPU-2.\n\n", processes[i].process_id[0]);
+                }
+                else {
+                    processes[i].arrival_time++;
+                    printf("robin16\n");
+                    printf("arrival time delayed\n\n");
+                }
+
                 break;
             default:
                 break;
@@ -246,37 +285,52 @@ void scheduleProcesses() {
 
 
     }
+
+    cRam = cUser + cHigh;
+
+    sjfAlgorithm(&q_sjf);
+    //roundRobinAlgorithm(&q_rr8);
+    //roundRobinAlgorithm(&q_rr16);
+    displayQueue(&q_sjf);
     
-    //Scheduling code using FCFS, SJF, and Round Robin algorithms
+    //Scheduling code using FCFS, SJF, and Round Robin algorithms----------------------------------
 }
 
 
 void fcfsAlgorithm(Process process) {
 };
 
-void sjfAlgorithm(Process process) {
-    if (checkResources(process) == 1) {
-        printf("sjf\n\n");
-        cUser = cUser + process.ram;
-        cCPU1 = cCPU1 + process.cpu_rate;
+void sjfAlgorithm(Queue* queue) {
+    int n = 0; // Number of elements in the queue (can be calculated dynamically)
+    Node* current, * min, * temp;
+
+    // Count the number of elements in the queue (optional)
+    current = queue->front;
+    while (current != NULL) {
+        n++;
+        current = current->next;
     }
-    else {
-        process.arrival_time++;
-        printf("sjf\n\n");
+
+    // Selection Sort implementation
+    for (int i = 0; i < n - 1; i++) {
+        min = &queue->front[i];
+        for (int j = i + 1; j < n; j++) {
+            temp = &queue->front[j];
+            if (temp->data.burst_time < min->data.burst_time) {
+                min = temp;
+            }
+        }
+
+        // Swap the elements (data within the nodes)
+        Process tempData = min->data;
+        min->data = queue->front[i].data;
+        queue->front[i].data = tempData;
     }
-};
+}
 
 void roundRobinAlgorithm(Process process,int quantum_time) {
 
-    if (checkResources(process) == 1) {
-        printf("robin\n\n");
-        cUser = cUser + process.ram;
-        cCPU1 = cCPU1 + process.cpu_rate;
-    }
-    else {
-        process.arrival_time++;
-        printf("robin\n\n");
-    }
+    
 };
 
 
