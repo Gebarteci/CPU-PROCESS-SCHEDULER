@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include<stdbool.h>
 
 #define MAX_PROCESSES 25
 #define RAM_SIZE 2048
@@ -12,12 +13,12 @@
 #define MAX_CPU0 100
 #define MAX_CPU1 100
 
-int count = 0; //clock
+int count = 0; //clock,milisecond
 
 
 // c = current
-int cProcesses, cUser, cHigh, cCPU0,cCPU1 = 0;
-int cRam;
+int cProcesses, cUser, cHigh, cCPU0,cCPU1, cRam = 0;
+
 
 
 
@@ -29,12 +30,35 @@ typedef struct {
     int burst_time;
     int ram;
     int cpu_rate;
-    int p_time; //processed time
+    int r_time; //remaining time
 } Process;
 
 Process processes[MAX_PROCESSES];
-int n = 0; //for assigning the variables into processes[]
+int n = 0; //Process number,for assigning the variables into processes[]
 
+// Structure for a queue node
+typedef struct Node {
+    Process data;
+    struct Node* next;
+} Node;
+
+// Structure for the queue
+typedef struct Queue {
+    Node* front;
+    Node* rear;
+} Queue;
+
+Queue q_fcfs;
+Queue q_sjf;
+Queue q_rr8;
+Queue q_rr16;
+
+//queue functions
+void initializeQueue(Queue* queue);
+int isEmpty(Queue* queue);
+void enqueue(Queue* queue, Process process);
+Process dequeue(Queue* queue);
+void displayQueue(Queue* queue);
 
 
 
@@ -44,7 +68,7 @@ void scheduleProcesses();
 void fcfsAlgorithm(Process process);
 void sjfAlgorithm(Process process);
 void roundRobinAlgorithm(Process process, int quantum_time);
-void checkResources(Process process);
+bool checkResources(Process process);
 void assignToCPU1(Process process);
 void assignToCPU2(Process process);
 void printOutputFile();
@@ -52,17 +76,21 @@ void printOutputFile();
 
 int main(int argc, char* argv[]) {
 
-    
-    
+    initializeQueue(&q_fcfs);
+    initializeQueue(&q_sjf);
+    initializeQueue(&q_rr8);
+    initializeQueue(&q_rr16);
+
     
     readFile("input.txt");
 
 
     while (1) {
 
+        
         scheduleProcesses();
-
         count++;
+        
     }
     
 
@@ -71,17 +99,17 @@ int main(int argc, char* argv[]) {
     return 0;
 }
 
-void checkResources(Process process) {
+bool checkResources(Process process) {
 
     if (process.priority == 0) {
 
-        if (cHigh + process.ram <= HIGH_PRIORITY_RAM && cCPU0 + process.cpu_rate <= MAX_CPU0) {
-            cHigh = cHigh + process.ram;
-            cCPU0 = cCPU0 + process.cpu_rate;
+        if ((cHigh + process.ram) <= HIGH_PRIORITY_RAM && (cCPU0 + process.cpu_rate) <= MAX_CPU0) {
+            
+            printf("resources are enough\n" );
             return 1;
         }
         else {
-            printf("resources are not enough");
+            printf("resources are not enough\n");
 
             return 0;
         }
@@ -90,12 +118,12 @@ void checkResources(Process process) {
     else {
 
         if (cUser + process.ram <= USER_PROCESS_RAM && cCPU1 + process.cpu_rate <= MAX_CPU1) {
-            cUser = cUser + process.ram;
-            cCPU1 = cCPU1 + process.cpu_rate;
+           
+            printf("resources are enough\n");
             return 1;
         }
         else {
-            printf("resources are not enough");
+            printf("resources are not enough\n");
             return 0;
         }
 
@@ -139,13 +167,14 @@ int readFile(char* filename) {
         processes[n].burst_time = atoi(strtok(NULL, ","));
         processes[n].ram = atoi(strtok(NULL, ","));
         processes[n].cpu_rate = atoi(strtok(NULL, ","));
-        processes[n].p_time = 0;
+        processes[n].r_time = 0;
 
 
         for (int i = 0; i < 2; i++) {
             processes[n].process_id[i] = processName[i]; // Format process ID as P1, P2, etc.
         }
-         
+
+        n++;
 
            
         
@@ -174,7 +203,7 @@ void scheduleProcesses() {
 
     for (int i = 0; i <= n; i++) {
 
-        if (processes[i].arrival_time = count) {
+        if (processes[i].arrival_time == count) {
 
             switch (processes[i].priority)
             {
@@ -205,19 +234,38 @@ void scheduleProcesses() {
 
 void fcfsAlgorithm(Process process) {
 
-    checkResources(process);
-
+    if (checkResources(process) == 1) {
+        printf("high\n\n");
+        cHigh = cHigh + process.ram;
+        cCPU0 = cCPU0 + process.cpu_rate;
+    }
+    else {
+        printf("high\n\n");
+    }
+   
 };
 
 void sjfAlgorithm(Process process) {
-    checkResources(process);
-    
-
+    if (checkResources(process) == 1) {
+        printf("sjf\n\n");
+        cUser = cUser + process.ram;
+        cCPU1 = cCPU1 + process.cpu_rate;
+    }
+    else {
+        printf("sjf\n\n");
+    }
 };
 
 void roundRobinAlgorithm(Process process,int quantum_time) {
-    checkResources(process);
 
+    if (checkResources(process) == 1) {
+        printf("robin\n\n");
+        cUser = cUser + process.ram;
+        cCPU1 = cCPU1 + process.cpu_rate;
+    }
+    else {
+        printf("robin\n\n");
+    }
 };
 
 
@@ -225,4 +273,63 @@ void roundRobinAlgorithm(Process process,int quantum_time) {
 void assignToCPU1(Process process) {};
 void assignToCPU2(Process process) {};
 void printOutputFile() {};
+
+//-------------------------queue functions
+
+void initializeQueue(Queue* queue) {
+    queue->front = NULL;
+    queue->rear = NULL;
+}
+
+int isEmpty(Queue* queue) {
+    return queue->front == NULL;
+}
+
+void enqueue(Queue* queue, Process process) {
+    Node* newNode = (Node*)malloc(sizeof(Node));
+    newNode->data = process;
+    newNode->next = NULL;
+
+    if (isEmpty(queue)) {
+        queue->front = queue->rear = newNode;
+    }
+    else {
+        queue->rear->next = newNode;
+        queue->rear = newNode;
+    }
+}
+
+Process dequeue(Queue* queue) {
+    if (isEmpty(queue)) {
+        printf("Queue is empty\n");
+        exit(1);  // Or handle the error appropriately
+    }
+
+    Node* temp = queue->front;
+    Process process = temp->data;
+    queue->front = queue->front->next;
+
+    if (queue->front == NULL) {
+        queue->rear = NULL;
+    }
+
+    free(temp);
+    return process;
+}
+
+void displayQueue(Queue* queue) {
+    if (isEmpty(queue)) {
+        printf("Queue is empty\n");
+        return;
+    }
+
+    Node* temp = queue->front;
+    while (temp != NULL) {
+        printf("Process ID: %s, Arrival Time: %d, Priority: %d, Burst Time: %d, RAM: %d, CPU Rate: %d, Remaining Time: %d\n",
+            temp->data.process_id, temp->data.arrival_time, temp->data.priority, temp->data.burst_time,
+            temp->data.ram, temp->data.cpu_rate, temp->data.r_time);
+        temp = temp->next;
+    }
+    printf("\n");
+}
 
