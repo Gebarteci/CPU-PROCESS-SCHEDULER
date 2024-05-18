@@ -69,8 +69,8 @@ void fcfsAlgorithm(Process process);
 void sjfAlgorithm(Process process);
 void roundRobinAlgorithm(Process process, int quantum_time);
 bool checkResources(Process process);
-void assignToCPU1(Process process);
-void assignToCPU2(Process process);
+void CPU1();
+void CPU2();
 void printOutputFile();
 
 
@@ -89,6 +89,9 @@ int main(int argc, char* argv[]) {
 
         
         scheduleProcesses();
+
+        CPU1();
+        CPU2();
         count++;
         
     }
@@ -208,7 +211,23 @@ void scheduleProcesses() {
             switch (processes[i].priority)
             {
             case 0:
-                fcfsAlgorithm(processes[i]);
+
+                if (checkResources(processes[i]) == 1) {
+
+                    printf("high\n");
+                    cHigh = cHigh + processes[i].ram;
+                    cCPU0 = cCPU0 + processes[i].cpu_rate;
+
+                    enqueue(&q_fcfs, processes[i]);
+                    printf("Process %d is queued to be assigned to CPU-1.\n\n", processes[i].process_id[0]);
+                }
+                else {
+                    processes[i].arrival_time++;
+                    printf("high\n");
+                    printf("arrival time delayed\n\n");
+                }
+
+                //fcfsAlgorithm(processes[i]);
                 break;
             case 1:
                 sjfAlgorithm(processes[i]);
@@ -233,16 +252,6 @@ void scheduleProcesses() {
 
 
 void fcfsAlgorithm(Process process) {
-
-    if (checkResources(process) == 1) {
-        printf("high\n\n");
-        cHigh = cHigh + process.ram;
-        cCPU0 = cCPU0 + process.cpu_rate;
-    }
-    else {
-        printf("high\n\n");
-    }
-   
 };
 
 void sjfAlgorithm(Process process) {
@@ -252,6 +261,7 @@ void sjfAlgorithm(Process process) {
         cCPU1 = cCPU1 + process.cpu_rate;
     }
     else {
+        process.arrival_time++;
         printf("sjf\n\n");
     }
 };
@@ -264,14 +274,15 @@ void roundRobinAlgorithm(Process process,int quantum_time) {
         cCPU1 = cCPU1 + process.cpu_rate;
     }
     else {
+        process.arrival_time++;
         printf("robin\n\n");
     }
 };
 
 
 
-void assignToCPU1(Process process) {};
-void assignToCPU2(Process process) {};
+void CPU1() {};
+void CPU2() {};
 void printOutputFile() {};
 
 //-------------------------queue functions
