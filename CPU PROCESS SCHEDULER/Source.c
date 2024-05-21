@@ -5,6 +5,8 @@
 #include <stdbool.h>
 
 
+
+
 //defining const variables
 #define MAX_PROCESSES 26
 #define RAM_SIZE 2048
@@ -330,7 +332,7 @@ void scheduleProcesses() {
 
 
 
-
+//sorting queue
 void sjfAlgorithm(Queue* queue) {
     int n = 0; // Number of elements in the queue (can be calculated dynamically) (local n variable)
     Node* current, * min, * temp;
@@ -396,8 +398,8 @@ void CPU1() {
 };
 
 
-
-void CPU2S() { //CPU2 assignment
+//CPU2 assignment
+void CPU2S() { 
 
     if (isEmpty(&q_sjf) == 0) { //checking if queues are not empty (for high priority first)
 
@@ -539,7 +541,7 @@ void enqueue(Queue* queue, Process process) {
 Process dequeue(Queue* queue) {
     if (isEmpty(queue)) {
         printf("Queue is empty\n");
-        exit(1);  // Or handle the error appropriately
+        exit(1);  
     }
 
     Node* temp = queue->front;
