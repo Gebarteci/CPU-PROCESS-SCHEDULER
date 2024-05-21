@@ -4,6 +4,8 @@
 #include <string.h>
 #include <stdbool.h>
 
+
+//defining const variables
 #define MAX_PROCESSES 26
 #define RAM_SIZE 2048
 #define HIGH_PRIORITY_RAM 512
@@ -13,6 +15,7 @@
 #define MAX_CPU0 100
 #define MAX_CPU1 100
 
+
 int count = 0; //ms clock
 
 
@@ -21,7 +24,7 @@ int count = 0; //ms clock
 // c = current
 int cProcesses, cUser, cHigh, cCPU0,cCPU1, cRam = 0;
 
-int q; //temporary quantum clock
+int q; //temporary quantum clock for every rr operation
 
 
 
@@ -32,14 +35,15 @@ typedef struct {
     int burst_time;
     int ram;
     int cpu_rate;
-    int r_time; //remaining time
+    int r_time; //remaining time??????
 } Process;
 
 Process processes[MAX_PROCESSES];
+
 int n = 0; //Process number,for assigning the variables into processes[]
 
-Process one;
-Process two;
+Process one; //current process of cpu1
+Process two; //current process of cpu2
 
 
 // Structure for a queue node
@@ -54,6 +58,7 @@ typedef struct Queue {
     Node* rear;
 } Queue;
 
+//defining queues for all algorithms
 Queue q_fcfs;
 Queue q_sjf;
 Queue q_rr8;
@@ -71,30 +76,31 @@ void displayQueue(Queue* queue);
 // Functions
 int readFile(char* filename);
 void scheduleProcesses();
-void fcfsAlgorithm(Process process);
 void sjfAlgorithm(Queue* queue);
-void roundRobinAlgorithm(Process process, int quantum_time);
 bool checkResources(Process process);
 void CPU1();
 void CPU2();
 void CPU2S();
-void printOutputFile();
+
 
 
 int main(int argc, char* argv[]) {
 
+    //setting up queues
     initializeQueue(&q_fcfs);
     initializeQueue(&q_sjf);
     initializeQueue(&q_rr8);
     initializeQueue(&q_rr16);
 
+    //setting up processes in CPUs
     one.burst_time = 0;
     two.burst_time = 0;
 
     
     readFile("input.txt");
 
-    FILE* output_file = freopen("output.txt", "w", stdout);
+
+    FILE* output_file = freopen("output.txt", "w", stdout); //output console
 
     if (output_file == NULL) {
         perror("freopen failed");
@@ -102,34 +108,42 @@ int main(int argc, char* argv[]) {
     }
 
 
-    while (1) {
+    while (1) { //infinite loop 
 
         
-        scheduleProcesses();
+        scheduleProcesses(); // schedule processes (everytime because of arrival time)
 
-        CPU1();
-        CPU2();
-        count++;
+        //processing 1ms of current process and assignment
+
+        CPU1(); 
+        CPU2(); 
+        
         
         if (isEmpty(&q_rr16) ==1 && isEmpty(&q_rr8)==1 && isEmpty(&q_sjf)==1 && isEmpty(&q_fcfs)==1 && one.burst_time ==0 &&two.burst_time==0) {
             break; 
-        }
+        } 
+
+        count++; //counting 1ms
     }
     
 
-    void printOutputFile();
-    printf("All tasks are completed");
+    // info
+    printf("All tasks are completed\n");
+    printf("MS= %d", count);
 
-    fclose(output_file);
+    fclose(output_file); //close file
     
 
-    return 1;
+    return 1; 
     
 }
 
+
+
+
 bool checkResources(Process process) {
 
-    if (process.priority == 0) {
+    if (process.priority == 0) { //checking 2 pool of ram and 2 cpu rates depending on priority
 
         if ((cHigh + process.ram) <= HIGH_PRIORITY_RAM && (cCPU0 + process.cpu_rate) <= MAX_CPU0) {
             
@@ -174,7 +188,7 @@ int readFile(char* filename) {
         return 1;
     }
 
-    char line[100]; // input uzunluguna gore ayarlanir
+    char line[100]; // for future upgrade for system
 
     while (fgets(line, sizeof(line), fp) != NULL) {
         
@@ -204,23 +218,11 @@ int readFile(char* filename) {
 
         n++;
 
-           
-        
-
-
-        
-        //printf("%d", processes[n].cpu_rate); //deneme icin
-
-       /* for (int i = 0; i < 2; ++i) {
-            printf("processName[%d] = %c\n", i, processName[i]);
-        }*/
-        
-
         
     }
      
 
-    fclose(fp);
+    fclose(fp); //close "input.txt"
 
     return 0;
 }
@@ -229,31 +231,40 @@ int readFile(char* filename) {
 
 void scheduleProcesses() {
 
-    for (int i = 0; i <= n; i++) {
+    for (int i = 0; i <= n; i++) { //looping all processes (n is process amount)
 
-        if (processes[i].arrival_time == count) {
+        if (processes[i].arrival_time == count) { // checking arrival time (count is current time)
 
-            switch (processes[i].priority)
+            switch (processes[i].priority) //enqueue for every priority in current time
             {
             case 0:
 
                 if (checkResources(processes[i]) == 1) {
 
                     printf("high\n");
-                    cHigh = cHigh + processes[i].ram;
+
+                    //allocating resources for chosen process
+                    cHigh = cHigh + processes[i].ram; 
                     cCPU0 = cCPU0 + processes[i].cpu_rate;
 
-                    enqueue(&q_fcfs, processes[i]);
+                    enqueue(&q_fcfs, processes[i]); //enqueue
+
                     printf("Process %d is queued to be assigned to CPU-1.\n\n", processes[i].process_id[0]);
                 }
                 else {
-                    processes[i].arrival_time++;
+
+                    processes[i].arrival_time++; 
+                    
+                    //no resources so delaying arrival time for future queue 
                     printf("high\n");
                     printf("arrival time delayed\n\n");
                 }
 
                 
                 break;
+
+                //same for every priority
+
             case 1:
                 if (checkResources(processes[i]) == 1) {
 
@@ -311,18 +322,17 @@ void scheduleProcesses() {
 
     }
 
-    cRam = cUser + cHigh;
+    cRam = cUser + cHigh; //calculating cuurent ram usage (for future features)
 
     
     
 }
 
 
-void fcfsAlgorithm(Process process) {
-};
+
 
 void sjfAlgorithm(Queue* queue) {
-    int n = 0; // Number of elements in the queue (can be calculated dynamically)
+    int n = 0; // Number of elements in the queue (can be calculated dynamically) (local n variable)
     Node* current, * min, * temp;
 
     // Count the number of elements in the queue 
@@ -350,28 +360,24 @@ void sjfAlgorithm(Queue* queue) {
     }
 }
 
-void roundRobinAlgorithm(Process process,int quantum_time) {
-
-    
-};
 
 
 
 void CPU1() {
     
-    if (one.burst_time != 0) {
+    if (one.burst_time != 0) { //if there is current process in cpu
         
         one.burst_time--; //completing 1ms of process
 
-        if (one.burst_time == 0 && isEmpty(&q_fcfs) == 0) {
+        if (one.burst_time == 0 && isEmpty(&q_fcfs) == 0) { //if process is completed and there is a process in queue 
 
             printf("Process %d is completed and terminated in CPU1.\n\n", one.process_id[0]);
             
-            
+            //deallocating memory and cpu
             cHigh = cHigh - one.ram;
             cCPU0 = cCPU0 - one.cpu_rate;
 
-            one = dequeue(&q_fcfs);
+            one = dequeue(&q_fcfs); //assigning new process in cpu
 
             printf("Process %d is assigned in CPU1.\n\n", one.process_id[0]);
 
@@ -391,24 +397,30 @@ void CPU1() {
 
 
 
-void CPU2S() {
+void CPU2S() { //CPU2 assignment
 
-    if (isEmpty(&q_sjf) == 0) {
+    if (isEmpty(&q_sjf) == 0) { //checking if queues are not empty (for high priority first)
 
-        sjfAlgorithm(&q_sjf);
-        two = dequeue(&q_sjf);
+        sjfAlgorithm(&q_sjf); // sorting queue for sjf 
+
+        two = dequeue(&q_sjf); //assigning process in cpu
+
         printf("Process %d is assigned in CPU2.\n\n", two.process_id[0]);
     }
     else if (isEmpty(&q_rr8) == 0) {
 
-        q = 8;
-        two = dequeue(&q_rr8);
+        q = QUANTUM_TIME_2; //defining quantum time for process
+
+        two = dequeue(&q_rr8);//assigning process in cpu
+
         printf("Process %d is assigned in CPU2.\n\n", two.process_id[0]);
     }
     else if (isEmpty(&q_rr16) == 0) {
 
-        q = 16;
-        two = dequeue(&q_rr16);
+        q = QUANTUM_TIME_3; //defining quantum time for process
+
+        two = dequeue(&q_rr16);//assigning process in cpu
+
         printf("Process %d is assigned in CPU2.\n\n", two.process_id[0]);
     }
 
@@ -417,47 +429,52 @@ void CPU2S() {
 
 };
 
-void CPU2() {
+void CPU2() { 
 
-    if (two.burst_time != 0 && two.priority == 1) {
+    if (two.burst_time != 0 && two.priority == 1) { //if there is current process in cpu
 
         two.burst_time--; //completing 1ms of process
 
-        if (two.burst_time == 0) {
+        if (two.burst_time == 0) { //if process is completed 
 
             printf("Process %d is completed and terminated in CPU2.\n\n", two.process_id[0]);
+
+            //deallocating resources
 
             cUser = cUser - two.ram;
             cCPU1 = cCPU1 - two.cpu_rate;
 
-            CPU2S();
+            CPU2S(); //assign new process
 
         }
     }
-    else if(two.burst_time != 0 && two.priority==2) {
+    else if(two.burst_time != 0 && two.priority==2) { //if there is current rr8 process in cpu
 
-        two.burst_time--;
-        q--;
+         two.burst_time--;//completing 1ms of process
 
-        if (q==0) {
+         q--; //decrease q clock
+
+        if (q==0) { // if process completed by defined q time 
 
             printf("Process %d run until the defined quantum time and is queued again because the process is not completed. \n\n", two.process_id[0]);
-            enqueue(&q_rr8,two);
+            enqueue(&q_rr8,two); //requeue process
+            CPU2S(); //assign new process 
 
-            CPU2S();
-
-        }else if (two.burst_time == 0){
+        }else if (two.burst_time == 0){ //if process is completed 
 
             printf("Process %d is completed and terminated in CPU2.\n\n", two.process_id[0]);
+
+            //deallocating resources
+
             cUser = cUser - two.ram;
             cCPU1 = cCPU1 - two.cpu_rate;
 
-            CPU2S();
+            CPU2S(); //assign new process
 
         }
 
     }
-    else if (two.burst_time != 0 && two.priority == 3) {
+    else if (two.burst_time != 0 && two.priority == 3) { // same as rr8 
         
         two.burst_time--;
         q--;
@@ -490,7 +507,7 @@ void CPU2() {
 };
 
 
-void printOutputFile() {};
+
 
 
 

@@ -650,4 +650,5 @@ Process 80 is assigned in CPU2.
 
 Process 80 is completed and terminated in CPU2.
 
-All tasks are compleated
+All tasks are completed
+MS= 41
