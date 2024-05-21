@@ -15,13 +15,13 @@
 
 int count = 0; //ms clock
 
-static int am = 0;
+
 
 
 // c = current
 int cProcesses, cUser, cHigh, cCPU0,cCPU1, cRam = 0;
 
-
+int q; //temporary quantum clock
 
 
 
@@ -61,7 +61,7 @@ Queue q_rr16;
 
 //queue functions
 void initializeQueue(Queue* queue);
-int isEmpty(Queue* queue);
+bool isEmpty(Queue* queue);
 void enqueue(Queue* queue, Process process);
 Process dequeue(Queue* queue);
 void displayQueue(Queue* queue);
@@ -77,6 +77,7 @@ void roundRobinAlgorithm(Process process, int quantum_time);
 bool checkResources(Process process);
 void CPU1();
 void CPU2();
+void CPU2S();
 void printOutputFile();
 
 
@@ -94,7 +95,7 @@ int main(int argc, char* argv[]) {
     readFile("input.txt");
 
 
-    while (count<80) {
+    while (1) {
 
         
         scheduleProcesses();
@@ -103,12 +104,18 @@ int main(int argc, char* argv[]) {
         CPU2();
         count++;
         
+        if (isEmpty(&q_rr16) ==1 && isEmpty(&q_rr8)==1 && isEmpty(&q_sjf)==1 && isEmpty(&q_fcfs)==1 && one.burst_time ==0 &&two.burst_time==0) {
+            break; 
+        }
     }
     
 
+    void printOutputFile();
+    printf("All tasks are compleated");
     
 
-    return 0;
+    return 1;
+    
 }
 
 bool checkResources(Process process) {
@@ -297,12 +304,8 @@ void scheduleProcesses() {
 
     cRam = cUser + cHigh;
 
-    sjfAlgorithm(&q_sjf);
-    //roundRobinAlgorithm(&q_rr8);
-    //roundRobinAlgorithm(&q_rr16);
-    displayQueue(&q_sjf);
     
-    //Scheduling code using FCFS, SJF, and Round Robin algorithms----------------------------------
+    
 }
 
 
@@ -355,8 +358,7 @@ void CPU1() {
 
             printf("Process %d is completed and terminated in CPU1.\n\n", one.process_id[0]);
             
-            am++;
-            printf("%d \n", am);
+            
             cHigh = cHigh - one.ram;
             cCPU0 = cCPU0 - one.cpu_rate;
 
@@ -364,19 +366,113 @@ void CPU1() {
 
         }
     }
-    else {
+    else if(isEmpty(&q_fcfs) == 0){
 
-        if (isEmpty(&q_fcfs) == 0) {
+        
             one = dequeue(&q_fcfs);//for first assignment
-        }
+        
     }
+
+};
+
+
+
+void CPU2S() {
+
+    if (isEmpty(&q_sjf) == 0) {
+
+        sjfAlgorithm(&q_sjf);
+        two = dequeue(&q_sjf);
+    }
+    else if (isEmpty(&q_rr8) == 0) {
+
+        q = 8;
+        two = dequeue(&q_rr8);
+    }
+    else if (isEmpty(&q_rr16) == 0) {
+
+        q = 16;
+        two = dequeue(&q_rr16);
+    }
+
+
+
 
 };
 
 void CPU2() {
 
+    if (two.burst_time != 0 && two.priority == 1) {
+
+        two.burst_time--; //completing 1ms of process
+
+        if (two.burst_time == 0) {
+
+            printf("Process %d is completed and terminated in CPU2.\n\n", two.process_id[0]);
+
+            cUser = cUser - two.ram;
+            cCPU1 = cCPU1 - two.cpu_rate;
+
+            CPU2S();
+
+        }
+    }
+    else if(two.burst_time != 0 && two.priority==2) {
+
+        two.burst_time--;
+        q--;
+
+        if (q==0) {
+
+            printf("Process %d run until the defined quantum time and is queued again because the process is not completed. \n\n", two.process_id[0]);
+            enqueue(&q_rr8,two);
+
+            CPU2S();
+
+        }else if (two.burst_time == 0){
+
+            printf("Process %d is completed and terminated in CPU2.\n\n", two.process_id[0]);
+            cUser = cUser - two.ram;
+            cCPU1 = cCPU1 - two.cpu_rate;
+
+            CPU2S();
+
+        }
+
+    }
+    else if (two.burst_time != 0 && two.priority == 3) {
+        
+        two.burst_time--;
+        q--;
+
+        if (q == 0) {
+
+            printf("Process %d run until the defined quantum time and is queued again because the process is not completed. \n\n", two.process_id[0]);
+            enqueue(&q_rr8, two);
+
+            CPU2S();
+
+        }
+        else if (two.burst_time == 0) {
+
+            printf("Process %d is completed and terminated in CPU2.\n\n", two.process_id[0]);
+            cUser = cUser - two.ram;
+            cCPU1 = cCPU1 - two.cpu_rate;
+
+            CPU2S();
+
+        }
+
+
+    }
+    else {
+        CPU2S(); //for first assignment
+    }
+
 
 };
+
+
 void printOutputFile() {};
 
 
@@ -388,7 +484,7 @@ void initializeQueue(Queue* queue) {
     queue->rear = NULL;
 }
 
-int isEmpty(Queue* queue) {
+bool isEmpty(Queue* queue) {
     return queue->front == NULL;
 }
 
