@@ -1,0 +1,653 @@
+resources are enough
+sjf
+Process 80 is queued to be assigned to CPU-2.
+
+resources are enough
+high
+Process 0 is queued to be assigned to CPU-1.
+
+Process 0 is assigned in CPU1.
+
+Process 80 is assigned in CPU2.
+
+resources are enough
+high
+Process 80 is queued to be assigned to CPU-1.
+
+resources are enough
+robin16
+Process 80 is queued to be assigned to CPU-2.
+
+resources are enough
+high
+Process 80 is queued to be assigned to CPU-1.
+
+resources are not enough
+robin8
+arrival time delayed
+
+Process 80 is assigned in CPU1.
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are enough
+high
+Process 80 is queued to be assigned to CPU-1.
+
+resources are enough
+high
+Process 80 is queued to be assigned to CPU-1.
+
+Process 80 is completed and terminated in CPU1.
+
+Process 80 is assigned in CPU1.
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are enough
+robin8
+Process 80 is queued to be assigned to CPU-2.
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are enough
+high
+Process 80 is queued to be assigned to CPU-1.
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are enough
+robin8
+Process 80 is queued to be assigned to CPU-2.
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are enough
+high
+Process 80 is queued to be assigned to CPU-1.
+
+resources are not enough
+robin16
+arrival time delayed
+
+Process 80 is completed and terminated in CPU1.
+
+Process 80 is assigned in CPU1.
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are enough
+robin16
+Process 80 is queued to be assigned to CPU-2.
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are enough
+sjf
+Process 80 is queued to be assigned to CPU-2.
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+Process 80 is completed and terminated in CPU1.
+
+Process 80 is assigned in CPU1.
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are enough
+robin8
+Process 80 is queued to be assigned to CPU-2.
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are enough
+high
+Process 80 is queued to be assigned to CPU-1.
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are enough
+high
+Process 80 is queued to be assigned to CPU-1.
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+Process 80 is completed and terminated in CPU1.
+
+Process 80 is assigned in CPU1.
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are enough
+high
+Process 80 is queued to be assigned to CPU-1.
+
+Process 80 is completed and terminated in CPU1.
+
+Process 80 is assigned in CPU1.
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are enough
+robin16
+Process 80 is queued to be assigned to CPU-2.
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are enough
+robin16
+Process 80 is queued to be assigned to CPU-2.
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are enough
+robin16
+Process 80 is queued to be assigned to CPU-2.
+
+Process 80 is completed and terminated in CPU1.
+
+Process 80 is assigned in CPU1.
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+Process 80 is completed and terminated in CPU1.
+
+Process 80 is assigned in CPU1.
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are enough
+sjf
+Process 80 is queued to be assigned to CPU-2.
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+Process 80 is completed and terminated in CPU1.
+
+Process 80 is assigned in CPU1.
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are enough
+robin8
+Process 80 is queued to be assigned to CPU-2.
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are enough
+robin16
+Process 80 is queued to be assigned to CPU-2.
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+robin16
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are enough
+robin16
+Process 80 is queued to be assigned to CPU-2.
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+resources are not enough
+robin8
+arrival time delayed
+
+resources are not enough
+sjf
+arrival time delayed
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+resources are enough
+robin8
+Process 80 is queued to be assigned to CPU-2.
+
+resources are enough
+sjf
+Process 80 is queued to be assigned to CPU-2.
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+Process 80 is completed and terminated in CPU2.
+
+Process 80 is assigned in CPU2.
+
+Process 80 is completed and terminated in CPU2.
+
+All tasks are compleated

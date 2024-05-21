@@ -94,6 +94,13 @@ int main(int argc, char* argv[]) {
     
     readFile("input.txt");
 
+    FILE* output_file = freopen("output.txt", "w", stdout);
+
+    if (output_file == NULL) {
+        perror("freopen failed");
+        return EXIT_FAILURE;
+    }
+
 
     while (1) {
 
@@ -111,7 +118,9 @@ int main(int argc, char* argv[]) {
     
 
     void printOutputFile();
-    printf("All tasks are compleated");
+    printf("All tasks are completed");
+
+    fclose(output_file);
     
 
     return 1;
@@ -364,12 +373,17 @@ void CPU1() {
 
             one = dequeue(&q_fcfs);
 
+            printf("Process %d is assigned in CPU1.\n\n", one.process_id[0]);
+
+
         }
     }
     else if(isEmpty(&q_fcfs) == 0){
 
         
             one = dequeue(&q_fcfs);//for first assignment
+
+            printf("Process %d is assigned in CPU1.\n\n", one.process_id[0]);
         
     }
 
@@ -383,16 +397,19 @@ void CPU2S() {
 
         sjfAlgorithm(&q_sjf);
         two = dequeue(&q_sjf);
+        printf("Process %d is assigned in CPU2.\n\n", two.process_id[0]);
     }
     else if (isEmpty(&q_rr8) == 0) {
 
         q = 8;
         two = dequeue(&q_rr8);
+        printf("Process %d is assigned in CPU2.\n\n", two.process_id[0]);
     }
     else if (isEmpty(&q_rr16) == 0) {
 
         q = 16;
         two = dequeue(&q_rr16);
+        printf("Process %d is assigned in CPU2.\n\n", two.process_id[0]);
     }
 
 
