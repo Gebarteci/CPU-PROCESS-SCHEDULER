@@ -66,6 +66,13 @@ Queue q_sjf;
 Queue q_rr8;
 Queue q_rr16;
 
+//queues for finishing order
+Queue qf_fcfs;
+Queue qf_sjf;
+Queue qf_rr8;
+Queue qf_rr16;
+
+
 //queue functions
 void initializeQueue(Queue* queue);
 bool isEmpty(Queue* queue);
@@ -94,6 +101,11 @@ int main(int argc, char* argv[]) {
     initializeQueue(&q_rr8);
     initializeQueue(&q_rr16);
 
+    initializeQueue(&qf_fcfs);
+    initializeQueue(&qf_sjf);
+    initializeQueue(&qf_rr8);
+    initializeQueue(&qf_rr16);
+
     //setting up processes in CPUs
     one.burst_time = 0;
     two.burst_time = 0;
@@ -117,20 +129,32 @@ int main(int argc, char* argv[]) {
 
         //processing 1ms of current process and assignment
 
+        
+
         CPU1(); 
         CPU2(); 
         
-        
-        if (isEmpty(&q_rr16) ==1 && isEmpty(&q_rr8)==1 && isEmpty(&q_sjf)==1 && isEmpty(&q_fcfs)==1 && one.burst_time ==0 &&two.burst_time==0) {
-            break; 
-        } 
+        if (isEmpty(&q_rr16) == 1 && isEmpty(&q_rr8) == 1 && isEmpty(&q_sjf) == 1 && isEmpty(&q_fcfs) == 1 && one.burst_time == 0 && two.burst_time == 0) {
+            break;
+        }
 
         count++; //counting 1ms
+        
     }
     
 
     // info
     printf("All tasks are completed\n");
+
+    printf("CPU-1 que1(priority-0) (FCFS)→");
+    displayQueue(&qf_fcfs);
+    printf("CPU-2 que2(priority-1) (SJF)→");
+    displayQueue(&qf_sjf);
+    printf("CPU-2 que3(priority-2) (RR-q8)→");
+    displayQueue(&qf_rr8);
+    printf("CPU-2 que4(priority-3) (RR-q16)→");
+    displayQueue(&qf_rr16);
+
     printf("MS= %d", count);
 
     fclose(output_file); //close file
@@ -379,10 +403,22 @@ void CPU1() {
             cHigh = cHigh - one.ram;
             cCPU0 = cCPU0 - one.cpu_rate;
 
+            enqueue(&qf_fcfs, one); //enqueue finished process in output queue
+
             one = dequeue(&q_fcfs); //assigning new process in cpu
 
             printf("Process %d is assigned in CPU1.\n\n", one.process_id[0]);
 
+
+        }
+        else if(one.burst_time == 0){
+
+            printf("Process %d is completed and terminated in CPU1.\n\n", one.process_id[0]);
+
+            cHigh = cHigh - one.ram;
+            cCPU0 = cCPU0 - one.cpu_rate;
+
+            enqueue(&qf_fcfs, one); //enqueue finished process in output queue
 
         }
     }
@@ -441,10 +477,14 @@ void CPU2() {
 
             printf("Process %d is completed and terminated in CPU2.\n\n", two.process_id[0]);
 
+            
+
             //deallocating resources
 
             cUser = cUser - two.ram;
             cCPU1 = cCPU1 - two.cpu_rate;
+
+            enqueue(&qf_sjf, two); //enqueue finished process in output queue
 
             CPU2S(); //assign new process
 
@@ -471,6 +511,7 @@ void CPU2() {
             cUser = cUser - two.ram;
             cCPU1 = cCPU1 - two.cpu_rate;
 
+            enqueue(&qf_rr8, two); //enqueue finished process in output queue
             CPU2S(); //assign new process
 
         }
@@ -495,6 +536,7 @@ void CPU2() {
             cUser = cUser - two.ram;
             cCPU1 = cCPU1 - two.cpu_rate;
 
+            enqueue(&qf_rr16, two); //enqueue finished process in output queue
             CPU2S();
 
         }

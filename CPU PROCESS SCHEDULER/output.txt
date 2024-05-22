@@ -576,6 +576,8 @@ resources are not enough
 sjf
 arrival time delayed
 
+Process 80 is completed and terminated in CPU1.
+
 resources are not enough
 robin8
 arrival time delayed
@@ -651,4 +653,33 @@ Process 80 is assigned in CPU2.
 Process 80 is completed and terminated in CPU2.
 
 All tasks are completed
+CPU-1 que1(priority-0) (FCFS)→Process ID: P, Arrival Time: 1, Priority: 0, Burst Time: 0, RAM: 50, CPU Rate: 6, Remaining Time: 1
+Process ID: P, Arrival Time: 1, Priority: 0, Burst Time: 0, RAM: 65, CPU Rate: 2, Remaining Time: 3
+Process ID: P, Arrival Time: 2, Priority: 0, Burst Time: 0, RAM: 55, CPU Rate: 12, Remaining Time: 4
+Process ID: P, Arrival Time: 2, Priority: 0, Burst Time: 0, RAM: 7, CPU Rate: 8, Remaining Time: 4
+Process ID: P, Arrival Time: 3, Priority: 0, Burst Time: 0, RAM: 28, CPU Rate: 20, Remaining Time: 2
+Process ID: P, Arrival Time: 5, Priority: 0, Burst Time: 0, RAM: 28, CPU Rate: 2, Remaining Time: 3
+Process ID: P, Arrival Time: 11, Priority: 0, Burst Time: 0, RAM: 62, CPU Rate: 20, Remaining Time: 4
+Process ID: P, Arrival Time: 12, Priority: 0, Burst Time: 0, RAM: 33, CPU Rate: 6, Remaining Time: 4
+Process ID: P, Arrival Time: 15, Priority: 0, Burst Time: 0, RAM: 40, CPU Rate: 12, Remaining Time: 4
+
+CPU-2 que2(priority-1) (SJF)→Process ID: P, Arrival Time: 0, Priority: 1, Burst Time: 0, RAM: 574, CPU Rate: 4, Remaining Time: 2
+Process ID: P, Arrival Time: 8, Priority: 1, Burst Time: 0, RAM: 78, CPU Rate: 8, Remaining Time: 4
+Process ID: P, Arrival Time: 25, Priority: 1, Burst Time: 0, RAM: 1074, CPU Rate: 6, Remaining Time: 2
+Process ID: P, Arrival Time: 36, Priority: 1, Burst Time: 0, RAM: 351, CPU Rate: 2, Remaining Time: 2
+
+CPU-2 que3(priority-2) (RR-q8)→Process ID: P, Arrival Time: 3, Priority: 2, Burst Time: 0, RAM: 625, CPU Rate: 3, Remaining Time: 2
+Process ID: P, Arrival Time: 5, Priority: 2, Burst Time: 0, RAM: 765, CPU Rate: 18, Remaining Time: 3
+Process ID: P, Arrival Time: 10, Priority: 2, Burst Time: 0, RAM: 832, CPU Rate: 4, Remaining Time: 4
+Process ID: P, Arrival Time: 27, Priority: 2, Burst Time: 0, RAM: 457, CPU Rate: 8, Remaining Time: 3
+Process ID: P, Arrival Time: 36, Priority: 2, Burst Time: 0, RAM: 759, CPU Rate: 36, Remaining Time: 2
+
+CPU-2 que4(priority-3) (RR-q16)→Process ID: P, Arrival Time: 1, Priority: 3, Burst Time: 0, RAM: 515, CPU Rate: 8, Remaining Time: 2
+Process ID: P, Arrival Time: 7, Priority: 3, Burst Time: 0, RAM: 158, CPU Rate: 4, Remaining Time: 2
+Process ID: P, Arrival Time: 16, Priority: 3, Burst Time: 0, RAM: 100, CPU Rate: 4, Remaining Time: 3
+Process ID: P, Arrival Time: 18, Priority: 3, Burst Time: 0, RAM: 853, CPU Rate: 2, Remaining Time: 2
+Process ID: P, Arrival Time: 18, Priority: 3, Burst Time: 0, RAM: 379, CPU Rate: 16, Remaining Time: 2
+Process ID: P, Arrival Time: 29, Priority: 3, Burst Time: 0, RAM: 1017, CPU Rate: 24, Remaining Time: 4
+Process ID: P, Arrival Time: 32, Priority: 3, Burst Time: 0, RAM: 417, CPU Rate: 4, Remaining Time: 2
+
 MS= 41
