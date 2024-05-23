@@ -4,9 +4,6 @@
 #include <string.h>
 #include <stdbool.h>
 
-
-
-
 //defining const variables
 #define MAX_PROCESSES 26
 #define RAM_SIZE 2048
@@ -19,9 +16,6 @@
 
 
 int count = 0; //ms clock
-
-
-
 
 // c = current
 int cProcesses, cUser, cHigh, cCPU0,cCPU1, cRam = 0;
