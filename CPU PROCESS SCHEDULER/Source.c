@@ -11,14 +11,14 @@
 #define USER_PROCESS_RAM (RAM_SIZE - HIGH_PRIORITY_RAM)
 #define QUANTUM_TIME_2 8
 #define QUANTUM_TIME_3 16
-#define MAX_CPU0 100
 #define MAX_CPU1 100
+#define MAX_CPU2 100
 
 
 int count = 0; //ms clock
 
 // c = current
-int cProcesses, cUser, cHigh, cCPU0,cCPU1, cRam = 0;
+int cProcesses, cUser, cHigh, cCPU1,cCPU2, cRam = 0;
 
 int q; //temporary quantum clock for every rr operation
 
@@ -165,7 +165,7 @@ bool checkResources(Process process) {
 
     if (process.priority == 0) { //checking 2 pool of ram and 2 cpu rates depending on priority
 
-        if ((cHigh + process.ram) <= HIGH_PRIORITY_RAM && (cCPU0 + process.cpu_rate) <= MAX_CPU0) {
+        if ((cHigh + process.ram) <= HIGH_PRIORITY_RAM && (cCPU1 + process.cpu_rate) <= MAX_CPU1) {
             
             printf("resources are enough\n" );
             return 1;
@@ -179,7 +179,7 @@ bool checkResources(Process process) {
     }
     else {
 
-        if (cUser + process.ram <= USER_PROCESS_RAM && cCPU1 + process.cpu_rate <= MAX_CPU1) {
+        if (cUser + process.ram <= USER_PROCESS_RAM && cCPU2 + process.cpu_rate <= MAX_CPU2) {
            
             printf("resources are enough\n");
             return 1;
@@ -265,7 +265,7 @@ void scheduleProcesses() {
 
                     //allocating resources for chosen process
                     cHigh = cHigh + processes[i].ram; 
-                    cCPU0 = cCPU0 + processes[i].cpu_rate;
+                    cCPU1 = cCPU1 + processes[i].cpu_rate;
 
                     enqueue(&q_fcfs, processes[i]); //enqueue
 
@@ -290,7 +290,7 @@ void scheduleProcesses() {
 
                     printf("sjf\n");
                     cUser = cUser + processes[i].ram;
-                    cCPU1 = cCPU1 + processes[i].cpu_rate;
+                    cCPU2 = cCPU2 + processes[i].cpu_rate;
 
                     enqueue(&q_sjf, processes[i]);
                     printf("Process %d is queued to be assigned to CPU-2.\n\n", processes[i].process_id[0]);
@@ -305,7 +305,7 @@ void scheduleProcesses() {
                 if (checkResources(processes[i]) == 1) {
                     printf("robin8\n");
                     cUser = cUser + processes[i].ram;
-                    cCPU1 = cCPU1 + processes[i].cpu_rate;
+                    cCPU2 = cCPU2 + processes[i].cpu_rate;
 
                     enqueue(&q_rr8, processes[i]);
                     printf("Process %d is queued to be assigned to CPU-2.\n\n", processes[i].process_id[0]);
@@ -321,7 +321,7 @@ void scheduleProcesses() {
                 if (checkResources(processes[i]) == 1) {
                     printf("robin16\n");
                     cUser = cUser + processes[i].ram;
-                    cCPU1 = cCPU1 + processes[i].cpu_rate;
+                    cCPU2 = cCPU2 + processes[i].cpu_rate;
 
                     enqueue(&q_rr16, processes[i]);
                     printf("Process %d is queued to be assigned to CPU-2.\n\n", processes[i].process_id[0]);
@@ -395,7 +395,7 @@ void CPU1() {
             
             //deallocating memory and cpu
             cHigh = cHigh - one.ram;
-            cCPU0 = cCPU0 - one.cpu_rate;
+            cCPU1 = cCPU1 - one.cpu_rate;
 
             enqueue(&qf_fcfs, one); //enqueue finished process in output queue
 
@@ -410,7 +410,7 @@ void CPU1() {
             printf("Process %d is completed and terminated in CPU1.\n\n", one.process_id[0]);
 
             cHigh = cHigh - one.ram;
-            cCPU0 = cCPU0 - one.cpu_rate;
+            cCPU1 = cCPU1 - one.cpu_rate;
 
             enqueue(&qf_fcfs, one); //enqueue finished process in output queue
 
@@ -476,7 +476,7 @@ void CPU2() {
             //deallocating resources
 
             cUser = cUser - two.ram;
-            cCPU1 = cCPU1 - two.cpu_rate;
+            cCPU2 = cCPU2 - two.cpu_rate;
 
             enqueue(&qf_sjf, two); //enqueue finished process in output queue
 
@@ -503,7 +503,7 @@ void CPU2() {
             //deallocating resources
 
             cUser = cUser - two.ram;
-            cCPU1 = cCPU1 - two.cpu_rate;
+            cCPU2 = cCPU2 - two.cpu_rate;
 
             enqueue(&qf_rr8, two); //enqueue finished process in output queue
             CPU2S(); //assign new process
@@ -528,7 +528,7 @@ void CPU2() {
 
             printf("Process %d is completed and terminated in CPU2.\n\n", two.process_id[0]);
             cUser = cUser - two.ram;
-            cCPU1 = cCPU1 - two.cpu_rate;
+            cCPU2 = cCPU2 - two.cpu_rate;
 
             enqueue(&qf_rr16, two); //enqueue finished process in output queue
             CPU2S();
