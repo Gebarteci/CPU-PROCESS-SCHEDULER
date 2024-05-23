@@ -34,12 +34,7 @@ typedef struct {
     int r_time; //remaining time??????
 } Process;
 
-Process processes[MAX_PROCESSES];
 
-int n = 0; //Process number,for assigning the variables into processes[]
-
-Process one; //current process of cpu1
-Process two; //current process of cpu2
 
 
 // Structure for a queue node
@@ -54,17 +49,7 @@ typedef struct Queue {
     Node* rear;
 } Queue;
 
-//defining queues for all algorithms
-Queue q_fcfs;
-Queue q_sjf;
-Queue q_rr8;
-Queue q_rr16;
 
-//queues for finishing order
-Queue qf_fcfs;
-Queue qf_sjf;
-Queue qf_rr8;
-Queue qf_rr16;
 
 
 //queue functions
@@ -85,6 +70,25 @@ void CPU1();
 void CPU2();
 void CPU2S();
 
+Process processes[MAX_PROCESSES];
+
+int n = 0; //Process number,for assigning the variables into processes[]
+
+Process one; //current process of cpu1
+Process two; //current process of cpu2
+
+//defining queues for all algorithms
+Queue q_fcfs;
+Queue q_sjf;
+Queue q_rr8;
+Queue q_rr16;
+
+//queues for finishing order
+Queue qf_fcfs;
+Queue qf_sjf;
+Queue qf_rr8;
+Queue qf_rr16;
+
 
 
 int main(int argc, char* argv[]) {
@@ -101,8 +105,11 @@ int main(int argc, char* argv[]) {
     initializeQueue(&qf_rr16);
 
     //setting up processes in CPUs
-    one.burst_time = 0;
-    two.burst_time = 0;
+    one.r_time = 0;
+    two.r_time = 0;
+
+    one.process_id = 50;
+    two.process_id = 51;
 
     
     readFile("input.txt");
@@ -128,7 +135,7 @@ int main(int argc, char* argv[]) {
         CPU1(); 
         CPU2(); 
         
-        if (isEmpty(&q_rr16) == 1 && isEmpty(&q_rr8) == 1 && isEmpty(&q_sjf) == 1 && isEmpty(&q_fcfs) == 1 && one.burst_time == 0 && two.burst_time == 0) {
+        if (isEmpty(&q_rr16) == 1 && isEmpty(&q_rr8) == 1 && isEmpty(&q_sjf) == 1 && isEmpty(&q_fcfs) == 1 && one.r_time == 0 && two.r_time == 0) {
             break;
         }
 
@@ -212,11 +219,7 @@ int readFile(char* filename) {
 
     while (fgets(line, sizeof(line), fp) != NULL) {
         
-        if (n == -1) {
-            n++;
-            continue;
-        }
-
+        
         processes[n].process_id = n + 1;
 
         char* token = strtok(line, ",");
@@ -249,7 +252,7 @@ void scheduleProcesses() {
 
     for (int i = 0; i <= n; i++) { //looping all processes (n is process amount)
 
-        if (processes[i].arrival_time == count) { // checking arrival time (count is current time)
+        if (processes[i].arrival_time == count && processes[i].process_id != 0) { // checking arrival time (count is current time) and ignore id0 (ghost process because of empty queue)
 
             switch (processes[i].priority) //enqueue for every priority in current time
             {
@@ -381,11 +384,11 @@ void sjfAlgorithm(Queue* queue) {
 
 void CPU1() {
     
-    if (one.burst_time != 0) { //if there is current process in cpu
+    if (one.r_time != 0) { //if there is current process in cpu
         
-        one.burst_time--; //completing 1ms of process
+        one.r_time--; //completing 1ms of process
 
-        if (one.burst_time == 0 && isEmpty(&q_fcfs) == 0) { //if process is completed and there is a process in queue 
+        if (one.r_time == 0 && isEmpty(&q_fcfs) == 0) { //if process is completed and there is a process in queue 
 
             printf("Process P%d is completed and terminated in CPU1.\n\n", one.process_id);
             
@@ -401,7 +404,7 @@ void CPU1() {
 
 
         }
-        else if(one.burst_time == 0){
+        else if(one.r_time == 0){
 
             printf("Process P%d is completed and terminated in CPU1.\n\n", one.process_id);
 
@@ -459,11 +462,11 @@ void CPU2S() {
 
 void CPU2() { 
 
-    if (two.burst_time != 0 && two.priority == 1) { //if there is current process in cpu
+    if (two.r_time != 0 && two.priority == 1) { //if there is current process in cpu
 
-        two.burst_time--; //completing 1ms of process
+        two.r_time--; //completing 1ms of process
 
-        if (two.burst_time == 0) { //if process is completed 
+        if (two.r_time == 0) { //if process is completed 
 
             printf("Process P%d is completed and terminated in CPU2.\n\n", two.process_id);
 
@@ -480,9 +483,9 @@ void CPU2() {
 
         }
     }
-    else if(two.burst_time != 0 && two.priority==2) { //if there is current rr8 process in cpu
+    else if(two.r_time != 0 && two.priority==2) { //if there is current rr8 process in cpu
 
-         two.burst_time--;//completing 1ms of process
+         two.r_time--;//completing 1ms of process
 
          q--; //decrease q clock
 
@@ -492,7 +495,7 @@ void CPU2() {
             enqueue(&q_rr8,two); //requeue process
             CPU2S(); //assign new process 
 
-        }else if (two.burst_time == 0){ //if process is completed 
+        }else if (two.r_time == 0){ //if process is completed 
 
             printf("Process P%d is completed and terminated in CPU2.\n\n", two.process_id);
 
@@ -507,9 +510,9 @@ void CPU2() {
         }
 
     }
-    else if (two.burst_time != 0 && two.priority == 3) { // same as rr8 
+    else if (two.r_time != 0 && two.priority == 3) { // same as rr8 
         
-        two.burst_time--;
+        two.r_time--;
         q--;
 
         if (q == 0) {
@@ -520,7 +523,7 @@ void CPU2() {
             CPU2S();
 
         }
-        else if (two.burst_time == 0) {
+        else if (two.r_time == 0) {
 
             printf("Process P%d is completed and terminated in CPU2.\n\n", two.process_id);
             cUser = cUser - two.ram;
