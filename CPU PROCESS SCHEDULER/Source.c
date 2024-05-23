@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 //defining const variables
-#define MAX_PROCESSES 50
+#define MAX_PROCESSES 50  //can be changed depending on the size of the project
 #define RAM_SIZE 2048
 #define HIGH_PRIORITY_RAM 512
 #define USER_PROCESS_RAM (RAM_SIZE - HIGH_PRIORITY_RAM)
@@ -31,7 +31,7 @@ typedef struct {
     int burst_time;
     int ram;
     int cpu_rate;
-    int r_time; //remaining time??????
+    int r_time; //remaining time for completion of process
 } Process;
 
 
@@ -65,7 +65,7 @@ void displayQueue(Queue* queue);
 int readFile(char* filename);
 void scheduleProcesses();
 void sjfAlgorithm(Queue* queue);
-bool checkResources(Process process);
+int checkResources(Process process);
 void CPU1();
 void CPU2();
 void CPU2S();
@@ -89,6 +89,9 @@ Queue qf_sjf;
 Queue qf_rr8;
 Queue qf_rr16;
 
+//queue for processes that can not be performed due to lack of resources!!
+Queue impossible;
+
 
 
 int main(int argc, char* argv[]) {
@@ -104,14 +107,13 @@ int main(int argc, char* argv[]) {
     initializeQueue(&qf_rr8);
     initializeQueue(&qf_rr16);
 
+    initializeQueue(&impossible);
+
     //setting up processes in CPUs
     one.r_time = 0;
     two.r_time = 0;
 
-    one.process_id = 50;
-    two.process_id = 51;
 
-    
     readFile("input.txt");
 
 
@@ -126,6 +128,8 @@ int main(int argc, char* argv[]) {
     while (1) { //infinite loop 
 
         
+        printf("--------------------- Current time (MS) = %d ---------------------\n\n", count);
+
         scheduleProcesses(); // schedule processes (everytime because of arrival time)
 
         //processing 1ms of current process and assignment
@@ -156,7 +160,10 @@ int main(int argc, char* argv[]) {
     printf("CPU-2 que4(priority-3) (RR-q16)→\n");
     displayQueue(&qf_rr16);
 
-    printf("MS= %d", count);
+    printf("Impossible processes→\n");
+    displayQueue(&impossible);
+
+    printf("Total time (MS) = %d\n\n", count);
 
     fclose(output_file); //close file
     
@@ -168,31 +175,42 @@ int main(int argc, char* argv[]) {
 
 
 
-bool checkResources(Process process) {
+int checkResources(Process process) {
 
     if (process.priority == 0) { //checking 2 pool of ram and 2 cpu rates depending on priority
 
-        if ((cHigh + process.ram) <= HIGH_PRIORITY_RAM && (cCPU1 + process.cpu_rate) <= MAX_CPU1) {
+        if (process.ram > HIGH_PRIORITY_RAM || process.cpu_rate > MAX_CPU1) {
+
             
-            printf("resources are enough for P%d\n", process.process_id );
+
+            return 2;
+        }
+        else if ((cHigh + process.ram) <= HIGH_PRIORITY_RAM && (cCPU1 + process.cpu_rate) <= MAX_CPU1) {
+            
+            
             return 1;
         }
         else {
-            printf("resources are not enough for P%d\n", process.process_id);
+            
 
             return 0;
         }
 
     }
     else {
+        if (process.ram > USER_PROCESS_RAM || process.cpu_rate > MAX_CPU2) {
 
-        if (cUser + process.ram <= USER_PROCESS_RAM && cCPU2 + process.cpu_rate <= MAX_CPU2) {
+            
+
+            return 2;
+        }
+        else if (cUser + process.ram <= USER_PROCESS_RAM && cCPU2 + process.cpu_rate <= MAX_CPU2) {
            
-            printf("resources are enough for P%d\n", process.process_id);
+            
             return 1;
         }
         else {
-            printf("resources are not enough for P%d\n", process.process_id);
+           
             return 0;
         }
 
@@ -260,6 +278,8 @@ void scheduleProcesses() {
 
                 if (checkResources(processes[i]) == 1) {
 
+                    printf("resources are enough for P%d\n", processes[i].process_id);
+
                     printf("fcfs\n");
 
                     //allocating resources for chosen process
@@ -270,13 +290,21 @@ void scheduleProcesses() {
 
                     printf("Process P%d is queued to be assigned to CPU-1.\n\n", processes[i].process_id);
                 }
-                else {
+                else if(checkResources(processes[i]) == 0) {
+                    printf("resources are not enough for P%d\n", processes[i].process_id);
 
                     processes[i].arrival_time++; 
                     
                     //no resources so delaying arrival time for future queue 
                     printf("fcfs\n");
                     printf("arrival time delayed\n\n");
+                }
+                else if (checkResources(processes[i]) == 2) {
+
+                    //exception handle for lack of system resources
+                    printf("system capacity are not enough for P%d\n", processes[i].process_id);
+
+                    enqueue(&impossible, processes[i]);
                 }
 
                 
@@ -287,6 +315,8 @@ void scheduleProcesses() {
             case 1:
                 if (checkResources(processes[i]) == 1) {
 
+                    printf("resources are enough for P%d\n", processes[i].process_id);
+
                     printf("sjf\n");
                     cUser = cUser + processes[i].ram;
                     cCPU2 = cCPU2 + processes[i].cpu_rate;
@@ -294,14 +324,23 @@ void scheduleProcesses() {
                     enqueue(&q_sjf, processes[i]);
                     printf("Process P%d is queued to be assigned to CPU-2.\n\n", processes[i].process_id);
                 }
-                else {
+                else if(checkResources(processes[i]) == 0) {
+                    printf("resources are not enough for P%d\n", processes[i].process_id);
+
                     processes[i].arrival_time++;
                     printf("sjf\n");
                     printf("arrival time delayed\n\n");
                 }
+                else if (checkResources(processes[i]) == 2) {
+                    printf("system capacity are not enough for P%d\n", processes[i].process_id);
+                    enqueue(&impossible, processes[i]);
+                }
                 break;
             case 2:
                 if (checkResources(processes[i]) == 1) {
+
+                    printf("resources are enough for P%d\n", processes[i].process_id);
+
                     printf("robin8\n");
                     cUser = cUser + processes[i].ram;
                     cCPU2 = cCPU2 + processes[i].cpu_rate;
@@ -309,15 +348,23 @@ void scheduleProcesses() {
                     enqueue(&q_rr8, processes[i]);
                     printf("Process P%d is queued to be assigned to CPU-2.\n\n", processes[i].process_id);
                 }
-                else {
+                else if(checkResources(processes[i]) == 0) {
+                    printf("resources are not enough for P%d\n", processes[i].process_id);
+
                     processes[i].arrival_time++;
                     printf("robin8\n");
                     printf("arrival time delayed\n\n");
+                }
+                else if (checkResources(processes[i]) == 2) {
+                    printf("system capacity are not enough for P%d\n", processes[i].process_id);
+                    enqueue(&impossible, processes[i]);
                 }
                 break;
             case 3:
 
                 if (checkResources(processes[i]) == 1) {
+                    printf("resources are enough for P%d\n", processes[i].process_id);
+
                     printf("robin16\n");
                     cUser = cUser + processes[i].ram;
                     cCPU2 = cCPU2 + processes[i].cpu_rate;
@@ -325,14 +372,22 @@ void scheduleProcesses() {
                     enqueue(&q_rr16, processes[i]);
                     printf("Process P%d is queued to be assigned to CPU-2.\n\n", processes[i].process_id);
                 }
-                else {
+                else if(checkResources(processes[i]) == 0){
+                    printf("resources are not enough for P%d\n", processes[i].process_id);
+
                     processes[i].arrival_time++;
                     printf("robin16\n");
                     printf("arrival time delayed\n\n");
                 }
+                else if (checkResources(processes[i]) == 2) {
+                    printf("system capacity are not enough for P%d\n", processes[i].process_id);
+                    enqueue(&impossible, processes[i]);
+                }
 
                 break;
             default:
+                printf("this priority is not defined in this system - P%d\n", processes[i].process_id); //exception handle for priority issues
+                enqueue(&impossible, processes[i]);
                 break;
             }
 
@@ -593,7 +648,7 @@ Process dequeue(Queue* queue) {
 
 void displayQueue(Queue* queue) {
     if (isEmpty(queue)) {
-        printf("Queue is empty\n");
+        printf("Queue is empty\n\n");
         return;
     }
 

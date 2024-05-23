@@ -1,8 +1,12 @@
+--------------------- Current time (MS) = 0 ---------------------
+
 resources are enough for P1
 sjf
 Process P1 is queued to be assigned to CPU-2.
 
 Process P1 is assigned in CPU2.
+
+--------------------- Current time (MS) = 1 ---------------------
 
 resources are enough for P2
 fcfs
@@ -21,6 +25,8 @@ robin8
 arrival time delayed
 
 Process P2 is assigned in CPU1.
+
+--------------------- Current time (MS) = 2 ---------------------
 
 resources are not enough for P5
 robin8
@@ -46,6 +52,8 @@ Process P1 is completed and terminated in CPU2.
 
 Process P3 is assigned in CPU2.
 
+--------------------- Current time (MS) = 3 ---------------------
+
 resources are enough for P5
 robin8
 Process P5 is queued to be assigned to CPU-2.
@@ -58,6 +66,8 @@ resources are enough for P9
 fcfs
 Process P9 is queued to be assigned to CPU-1.
 
+--------------------- Current time (MS) = 4 ---------------------
+
 resources are not enough for P6
 robin8
 arrival time delayed
@@ -69,6 +79,8 @@ arrival time delayed
 Process P3 is completed and terminated in CPU2.
 
 Process P5 is assigned in CPU2.
+
+--------------------- Current time (MS) = 5 ---------------------
 
 resources are enough for P6
 robin8
@@ -90,6 +102,8 @@ Process P4 is completed and terminated in CPU1.
 
 Process P7 is assigned in CPU1.
 
+--------------------- Current time (MS) = 6 ---------------------
+
 resources are not enough for P10
 robin8
 arrival time delayed
@@ -110,6 +124,8 @@ Process P5 is completed and terminated in CPU2.
 
 Process P6 is assigned in CPU2.
 
+--------------------- Current time (MS) = 7 ---------------------
+
 resources are not enough for P10
 robin8
 arrival time delayed
@@ -126,6 +142,8 @@ resources are not enough for P14
 sjf
 arrival time delayed
 
+--------------------- Current time (MS) = 8 ---------------------
+
 resources are not enough for P10
 robin8
 arrival time delayed
@@ -141,6 +159,8 @@ arrival time delayed
 resources are enough for P15
 sjf
 Process P15 is queued to be assigned to CPU-2.
+
+--------------------- Current time (MS) = 9 ---------------------
 
 resources are not enough for P10
 robin8
@@ -166,6 +186,8 @@ Process P6 is completed and terminated in CPU2.
 
 Process P15 is assigned in CPU2.
 
+--------------------- Current time (MS) = 10 ---------------------
+
 resources are enough for P10
 robin8
 Process P10 is queued to be assigned to CPU-2.
@@ -181,6 +203,8 @@ arrival time delayed
 resources are not enough for P16
 robin16
 arrival time delayed
+
+--------------------- Current time (MS) = 11 ---------------------
 
 resources are not enough for P12
 robin16
@@ -198,6 +222,8 @@ resources are enough for P17
 fcfs
 Process P17 is queued to be assigned to CPU-1.
 
+--------------------- Current time (MS) = 12 ---------------------
+
 resources are not enough for P12
 robin16
 arrival time delayed
@@ -213,6 +239,8 @@ arrival time delayed
 resources are enough for P18
 fcfs
 Process P18 is queued to be assigned to CPU-1.
+
+--------------------- Current time (MS) = 13 ---------------------
 
 resources are not enough for P12
 robin16
@@ -234,6 +262,8 @@ Process P15 is completed and terminated in CPU2.
 
 Process P10 is assigned in CPU2.
 
+--------------------- Current time (MS) = 14 ---------------------
+
 resources are not enough for P12
 robin16
 arrival time delayed
@@ -249,6 +279,8 @@ arrival time delayed
 resources are not enough for P19
 robin8
 arrival time delayed
+
+--------------------- Current time (MS) = 15 ---------------------
 
 resources are not enough for P12
 robin16
@@ -274,6 +306,8 @@ Process P9 is completed and terminated in CPU1.
 
 Process P11 is assigned in CPU1.
 
+--------------------- Current time (MS) = 16 ---------------------
+
 resources are not enough for P12
 robin16
 arrival time delayed
@@ -294,6 +328,8 @@ resources are enough for P21
 robin16
 Process P21 is queued to be assigned to CPU-2.
 
+--------------------- Current time (MS) = 17 ---------------------
+
 resources are not enough for P12
 robin16
 arrival time delayed
@@ -313,6 +349,8 @@ arrival time delayed
 Process P10 is completed and terminated in CPU2.
 
 Process P13 is assigned in CPU2.
+
+--------------------- Current time (MS) = 18 ---------------------
 
 resources are enough for P12
 robin16
@@ -338,6 +376,8 @@ Process P11 is completed and terminated in CPU1.
 
 Process P17 is assigned in CPU1.
 
+--------------------- Current time (MS) = 19 ---------------------
+
 resources are not enough for P14
 sjf
 arrival time delayed
@@ -354,17 +394,7 @@ Process P13 is completed and terminated in CPU2.
 
 Process P21 is assigned in CPU2.
 
-resources are not enough for P14
-sjf
-arrival time delayed
-
-resources are not enough for P16
-robin16
-arrival time delayed
-
-resources are not enough for P19
-robin8
-arrival time delayed
+--------------------- Current time (MS) = 20 ---------------------
 
 resources are not enough for P14
 sjf
@@ -377,6 +407,22 @@ arrival time delayed
 resources are not enough for P19
 robin8
 arrival time delayed
+
+--------------------- Current time (MS) = 21 ---------------------
+
+resources are not enough for P14
+sjf
+arrival time delayed
+
+resources are not enough for P16
+robin16
+arrival time delayed
+
+resources are not enough for P19
+robin8
+arrival time delayed
+
+--------------------- Current time (MS) = 22 ---------------------
 
 resources are not enough for P14
 sjf
@@ -402,6 +448,8 @@ Process P21 is completed and terminated in CPU2.
 
 Process P12 is assigned in CPU2.
 
+--------------------- Current time (MS) = 23 ---------------------
+
 resources are not enough for P14
 sjf
 arrival time delayed
@@ -421,6 +469,8 @@ arrival time delayed
 resources are not enough for P24
 robin16
 arrival time delayed
+
+--------------------- Current time (MS) = 24 ---------------------
 
 resources are not enough for P14
 sjf
@@ -450,6 +500,8 @@ Process P12 is completed and terminated in CPU2.
 
 Process P22 is assigned in CPU2.
 
+--------------------- Current time (MS) = 25 ---------------------
+
 resources are enough for P14
 sjf
 Process P14 is queued to be assigned to CPU-2.
@@ -473,6 +525,8 @@ arrival time delayed
 resources are not enough for P25
 sjf
 arrival time delayed
+
+--------------------- Current time (MS) = 26 ---------------------
 
 resources are not enough for P16
 robin16
@@ -502,6 +556,8 @@ Process P22 is completed and terminated in CPU2.
 
 Process P14 is assigned in CPU2.
 
+--------------------- Current time (MS) = 27 ---------------------
+
 resources are not enough for P16
 robin16
 arrival time delayed
@@ -521,6 +577,8 @@ arrival time delayed
 resources are not enough for P25
 sjf
 arrival time delayed
+
+--------------------- Current time (MS) = 28 ---------------------
 
 resources are not enough for P16
 robin16
@@ -542,6 +600,8 @@ Process P14 is completed and terminated in CPU2.
 
 Process P23 is assigned in CPU2.
 
+--------------------- Current time (MS) = 29 ---------------------
+
 resources are enough for P16
 robin16
 Process P16 is queued to be assigned to CPU-2.
@@ -558,6 +618,8 @@ resources are not enough for P25
 sjf
 arrival time delayed
 
+--------------------- Current time (MS) = 30 ---------------------
+
 resources are not enough for P19
 robin8
 arrival time delayed
@@ -571,6 +633,8 @@ sjf
 arrival time delayed
 
 Process P20 is completed and terminated in CPU1.
+
+--------------------- Current time (MS) = 31 ---------------------
 
 resources are not enough for P19
 robin8
@@ -588,6 +652,8 @@ Process P23 is completed and terminated in CPU2.
 
 Process P16 is assigned in CPU2.
 
+--------------------- Current time (MS) = 32 ---------------------
+
 resources are not enough for P19
 robin8
 arrival time delayed
@@ -600,13 +666,7 @@ resources are not enough for P25
 sjf
 arrival time delayed
 
-resources are not enough for P19
-robin8
-arrival time delayed
-
-resources are not enough for P25
-sjf
-arrival time delayed
+--------------------- Current time (MS) = 33 ---------------------
 
 resources are not enough for P19
 robin8
@@ -615,6 +675,18 @@ arrival time delayed
 resources are not enough for P25
 sjf
 arrival time delayed
+
+--------------------- Current time (MS) = 34 ---------------------
+
+resources are not enough for P19
+robin8
+arrival time delayed
+
+resources are not enough for P25
+sjf
+arrival time delayed
+
+--------------------- Current time (MS) = 35 ---------------------
 
 resources are not enough for P19
 robin8
@@ -628,6 +700,8 @@ Process P16 is completed and terminated in CPU2.
 
 Process P24 is assigned in CPU2.
 
+--------------------- Current time (MS) = 36 ---------------------
+
 resources are enough for P19
 robin8
 Process P19 is queued to be assigned to CPU-2.
@@ -636,13 +710,23 @@ resources are enough for P25
 sjf
 Process P25 is queued to be assigned to CPU-2.
 
+--------------------- Current time (MS) = 37 ---------------------
+
 Process P24 is completed and terminated in CPU2.
 
 Process P25 is assigned in CPU2.
 
+--------------------- Current time (MS) = 38 ---------------------
+
+--------------------- Current time (MS) = 39 ---------------------
+
 Process P25 is completed and terminated in CPU2.
 
 Process P19 is assigned in CPU2.
+
+--------------------- Current time (MS) = 40 ---------------------
+
+--------------------- Current time (MS) = 41 ---------------------
 
 Process P19 is completed and terminated in CPU2.
 
@@ -680,4 +764,8 @@ Process ID: P22, Arrival Time: 18, Priority: 3, Burst Time: 2, RAM: 379, CPU Rat
 Process ID: P16, Arrival Time: 29, Priority: 3, Burst Time: 4, RAM: 1017, CPU Rate: 24, Remaining Time: 0
 Process ID: P24, Arrival Time: 32, Priority: 3, Burst Time: 2, RAM: 417, CPU Rate: 4, Remaining Time: 0
 
-MS= 41
+Impossible processes→
+Queue is empty
+
+Total time (MS) = 41
+
