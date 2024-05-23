@@ -1,685 +1,689 @@
-resources are enough
+resources are enough for P1
 sjf
-Process 80 is queued to be assigned to CPU-2.
+Process P1 is queued to be assigned to CPU-2.
 
-resources are enough
-high
-Process 0 is queued to be assigned to CPU-1.
+resources are enough for P0
+fcfs
+Process P0 is queued to be assigned to CPU-1.
 
-Process 0 is assigned in CPU1.
+Process P0 is assigned in CPU1.
 
-Process 80 is assigned in CPU2.
+Process P1 is assigned in CPU2.
 
-resources are enough
-high
-Process 80 is queued to be assigned to CPU-1.
+resources are enough for P2
+fcfs
+Process P2 is queued to be assigned to CPU-1.
 
-resources are enough
+resources are enough for P3
 robin16
-Process 80 is queued to be assigned to CPU-2.
+Process P3 is queued to be assigned to CPU-2.
 
-resources are enough
-high
-Process 80 is queued to be assigned to CPU-1.
+resources are enough for P4
+fcfs
+Process P4 is queued to be assigned to CPU-1.
 
-resources are not enough
+resources are not enough for P5
 robin8
 arrival time delayed
 
-Process 80 is assigned in CPU1.
+Process P2 is assigned in CPU1.
 
-resources are not enough
+resources are not enough for P5
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P6
 robin8
 arrival time delayed
 
-resources are enough
-high
-Process 80 is queued to be assigned to CPU-1.
+resources are enough for P7
+fcfs
+Process P7 is queued to be assigned to CPU-1.
 
-resources are enough
-high
-Process 80 is queued to be assigned to CPU-1.
+resources are enough for P8
+fcfs
+Process P8 is queued to be assigned to CPU-1.
 
-Process 80 is completed and terminated in CPU1.
+Process P2 is completed and terminated in CPU1.
 
-Process 80 is assigned in CPU1.
+Process P4 is assigned in CPU1.
 
-Process 80 is completed and terminated in CPU2.
+Process P1 is completed and terminated in CPU2.
 
-Process 80 is assigned in CPU2.
+Process P3 is assigned in CPU2.
 
-resources are enough
+resources are enough for P5
 robin8
-Process 80 is queued to be assigned to CPU-2.
+Process P5 is queued to be assigned to CPU-2.
 
-resources are not enough
-robin8
-arrival time delayed
-
-resources are enough
-high
-Process 80 is queued to be assigned to CPU-1.
-
-resources are not enough
+resources are not enough for P6
 robin8
 arrival time delayed
 
-resources are not enough
+resources are enough for P9
+fcfs
+Process P9 is queued to be assigned to CPU-1.
+
+resources are not enough for P6
 robin8
 arrival time delayed
 
-Process 80 is completed and terminated in CPU2.
-
-Process 80 is assigned in CPU2.
-
-resources are enough
-robin8
-Process 80 is queued to be assigned to CPU-2.
-
-resources are not enough
+resources are not enough for P10
 robin8
 arrival time delayed
 
-resources are enough
-high
-Process 80 is queued to be assigned to CPU-1.
+Process P3 is completed and terminated in CPU2.
 
-resources are not enough
-robin16
-arrival time delayed
+Process P5 is assigned in CPU2.
 
-Process 80 is completed and terminated in CPU1.
+resources are enough for P6
+robin8
+Process P6 is queued to be assigned to CPU-2.
 
-Process 80 is assigned in CPU1.
-
-resources are not enough
+resources are not enough for P10
 robin8
 arrival time delayed
 
-resources are not enough
+resources are enough for P11
+fcfs
+Process P11 is queued to be assigned to CPU-1.
+
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are not enough
-robin16
-arrival time delayed
+Process P4 is completed and terminated in CPU1.
 
-resources are not enough
-sjf
-arrival time delayed
+Process P7 is assigned in CPU1.
 
-Process 80 is completed and terminated in CPU2.
-
-Process 80 is assigned in CPU2.
-
-resources are not enough
+resources are not enough for P10
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are enough
+resources are not enough for P13
 robin16
-Process 80 is queued to be assigned to CPU-2.
+arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+Process P5 is completed and terminated in CPU2.
+
+Process P6 is assigned in CPU2.
+
+resources are not enough for P10
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are not enough
+resources are enough for P13
+robin16
+Process P13 is queued to be assigned to CPU-2.
+
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are enough
-sjf
-Process 80 is queued to be assigned to CPU-2.
-
-resources are not enough
+resources are not enough for P10
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
-robin16
-arrival time delayed
+resources are enough for P15
+sjf
+Process P15 is queued to be assigned to CPU-2.
 
-Process 80 is completed and terminated in CPU1.
-
-Process 80 is assigned in CPU1.
-
-Process 80 is completed and terminated in CPU2.
-
-Process 80 is assigned in CPU2.
-
-resources are enough
+resources are not enough for P10
 robin8
-Process 80 is queued to be assigned to CPU-2.
+arrival time delayed
 
-resources are not enough
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+Process P7 is completed and terminated in CPU1.
+
+Process P8 is assigned in CPU1.
+
+Process P6 is completed and terminated in CPU2.
+
+Process P15 is assigned in CPU2.
+
+resources are enough for P10
+robin8
+Process P10 is queued to be assigned to CPU-2.
+
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are enough
-high
-Process 80 is queued to be assigned to CPU-1.
-
-resources are not enough
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are enough
-high
-Process 80 is queued to be assigned to CPU-1.
+resources are enough for P17
+fcfs
+Process P17 is queued to be assigned to CPU-1.
 
-resources are not enough
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-Process 80 is completed and terminated in CPU1.
+resources are enough for P18
+fcfs
+Process P18 is queued to be assigned to CPU-1.
 
-Process 80 is assigned in CPU1.
-
-Process 80 is completed and terminated in CPU2.
-
-Process 80 is assigned in CPU2.
-
-resources are not enough
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
-robin8
-arrival time delayed
+Process P8 is completed and terminated in CPU1.
 
-resources are not enough
+Process P9 is assigned in CPU1.
+
+Process P15 is completed and terminated in CPU2.
+
+Process P10 is assigned in CPU2.
+
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are enough
-high
-Process 80 is queued to be assigned to CPU-1.
-
-Process 80 is completed and terminated in CPU1.
-
-Process 80 is assigned in CPU1.
-
-resources are not enough
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are enough
-robin16
-Process 80 is queued to be assigned to CPU-2.
+resources are enough for P20
+fcfs
+Process P20 is queued to be assigned to CPU-1.
 
-resources are not enough
+Process P9 is completed and terminated in CPU1.
+
+Process P11 is assigned in CPU1.
+
+resources are not enough for P12
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-Process 80 is completed and terminated in CPU2.
-
-Process 80 is assigned in CPU2.
-
-resources are enough
+resources are enough for P21
 robin16
-Process 80 is queued to be assigned to CPU-2.
+Process P21 is queued to be assigned to CPU-2.
 
-resources are not enough
+resources are not enough for P12
+robin16
+arrival time delayed
+
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are enough
+Process P10 is completed and terminated in CPU2.
+
+Process P13 is assigned in CPU2.
+
+resources are enough for P12
 robin16
-Process 80 is queued to be assigned to CPU-2.
+Process P12 is queued to be assigned to CPU-2.
 
-Process 80 is completed and terminated in CPU1.
-
-Process 80 is assigned in CPU1.
-
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-Process 80 is completed and terminated in CPU2.
+resources are enough for P22
+robin16
+Process P22 is queued to be assigned to CPU-2.
 
-Process 80 is assigned in CPU2.
+Process P11 is completed and terminated in CPU1.
 
-resources are not enough
+Process P17 is assigned in CPU1.
+
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+Process P13 is completed and terminated in CPU2.
+
+Process P21 is assigned in CPU2.
+
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
-robin8
-arrival time delayed
-
-Process 80 is completed and terminated in CPU1.
-
-Process 80 is assigned in CPU1.
-
-Process 80 is completed and terminated in CPU2.
-
-Process 80 is assigned in CPU2.
-
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P23
 robin8
 arrival time delayed
 
-resources are not enough
-robin16
-arrival time delayed
+Process P17 is completed and terminated in CPU1.
 
-resources are not enough
+Process P18 is assigned in CPU1.
+
+Process P21 is completed and terminated in CPU2.
+
+Process P12 is assigned in CPU2.
+
+resources are not enough for P14
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P23
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P24
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P14
 sjf
 arrival time delayed
 
-Process 80 is completed and terminated in CPU2.
-
-Process 80 is assigned in CPU2.
-
-resources are enough
-sjf
-Process 80 is queued to be assigned to CPU-2.
-
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P23
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P24
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P25
 sjf
 arrival time delayed
 
-resources are not enough
+Process P12 is completed and terminated in CPU2.
+
+Process P22 is assigned in CPU2.
+
+resources are enough for P14
+sjf
+Process P14 is queued to be assigned to CPU-2.
+
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P23
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P24
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P25
 sjf
 arrival time delayed
 
-Process 80 is completed and terminated in CPU1.
-
-Process 80 is assigned in CPU1.
-
-Process 80 is completed and terminated in CPU2.
-
-Process 80 is assigned in CPU2.
-
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are enough
+resources are not enough for P23
 robin8
-Process 80 is queued to be assigned to CPU-2.
+arrival time delayed
 
-resources are not enough
+resources are not enough for P24
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P25
 sjf
 arrival time delayed
 
-resources are not enough
+Process P18 is completed and terminated in CPU1.
+
+Process P20 is assigned in CPU1.
+
+Process P22 is completed and terminated in CPU2.
+
+Process P14 is assigned in CPU2.
+
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+resources are enough for P23
+robin8
+Process P23 is queued to be assigned to CPU-2.
+
+resources are not enough for P24
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P25
 sjf
 arrival time delayed
 
-Process 80 is completed and terminated in CPU2.
-
-Process 80 is assigned in CPU2.
-
-resources are enough
-robin16
-Process 80 is queued to be assigned to CPU-2.
-
-resources are not enough
-robin8
-arrival time delayed
-
-resources are not enough
+resources are not enough for P16
 robin16
 arrival time delayed
 
-resources are not enough
-sjf
-arrival time delayed
-
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P24
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P25
 sjf
 arrival time delayed
 
-Process 80 is completed and terminated in CPU1.
+Process P14 is completed and terminated in CPU2.
 
-resources are not enough
+Process P23 is assigned in CPU2.
+
+resources are enough for P16
+robin16
+Process P16 is queued to be assigned to CPU-2.
+
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P24
 robin16
 arrival time delayed
 
-resources are not enough
+resources are not enough for P25
 sjf
 arrival time delayed
 
-Process 80 is completed and terminated in CPU2.
-
-Process 80 is assigned in CPU2.
-
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are enough
+resources are not enough for P24
 robin16
-Process 80 is queued to be assigned to CPU-2.
+arrival time delayed
 
-resources are not enough
+resources are not enough for P25
 sjf
 arrival time delayed
 
-resources are not enough
+Process P20 is completed and terminated in CPU1.
+
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P24
+robin16
+arrival time delayed
+
+resources are not enough for P25
 sjf
 arrival time delayed
 
-resources are not enough
+Process P23 is completed and terminated in CPU2.
+
+Process P16 is assigned in CPU2.
+
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+resources are enough for P24
+robin16
+Process P24 is queued to be assigned to CPU-2.
+
+resources are not enough for P25
 sjf
 arrival time delayed
 
-resources are not enough
+resources are not enough for P19
 robin8
 arrival time delayed
 
-resources are not enough
+resources are not enough for P25
 sjf
 arrival time delayed
 
-Process 80 is completed and terminated in CPU2.
-
-Process 80 is assigned in CPU2.
-
-resources are enough
+resources are not enough for P19
 robin8
-Process 80 is queued to be assigned to CPU-2.
+arrival time delayed
 
-resources are enough
+resources are not enough for P25
 sjf
-Process 80 is queued to be assigned to CPU-2.
+arrival time delayed
 
-Process 80 is completed and terminated in CPU2.
+resources are not enough for P19
+robin8
+arrival time delayed
 
-Process 80 is assigned in CPU2.
+resources are not enough for P25
+sjf
+arrival time delayed
 
-Process 80 is completed and terminated in CPU2.
+Process P16 is completed and terminated in CPU2.
 
-Process 80 is assigned in CPU2.
+Process P24 is assigned in CPU2.
 
-Process 80 is completed and terminated in CPU2.
+resources are enough for P19
+robin8
+Process P19 is queued to be assigned to CPU-2.
+
+resources are enough for P25
+sjf
+Process P25 is queued to be assigned to CPU-2.
+
+Process P24 is completed and terminated in CPU2.
+
+Process P25 is assigned in CPU2.
+
+Process P25 is completed and terminated in CPU2.
+
+Process P19 is assigned in CPU2.
+
+Process P19 is completed and terminated in CPU2.
 
 All tasks are completed
-CPU-1 que1(priority-0) (FCFS)→Process ID: P, Arrival Time: 1, Priority: 0, Burst Time: 0, RAM: 50, CPU Rate: 6, Remaining Time: 1
-Process ID: P, Arrival Time: 1, Priority: 0, Burst Time: 0, RAM: 65, CPU Rate: 2, Remaining Time: 3
-Process ID: P, Arrival Time: 2, Priority: 0, Burst Time: 0, RAM: 55, CPU Rate: 12, Remaining Time: 4
-Process ID: P, Arrival Time: 2, Priority: 0, Burst Time: 0, RAM: 7, CPU Rate: 8, Remaining Time: 4
-Process ID: P, Arrival Time: 3, Priority: 0, Burst Time: 0, RAM: 28, CPU Rate: 20, Remaining Time: 2
-Process ID: P, Arrival Time: 5, Priority: 0, Burst Time: 0, RAM: 28, CPU Rate: 2, Remaining Time: 3
-Process ID: P, Arrival Time: 11, Priority: 0, Burst Time: 0, RAM: 62, CPU Rate: 20, Remaining Time: 4
-Process ID: P, Arrival Time: 12, Priority: 0, Burst Time: 0, RAM: 33, CPU Rate: 6, Remaining Time: 4
-Process ID: P, Arrival Time: 15, Priority: 0, Burst Time: 0, RAM: 40, CPU Rate: 12, Remaining Time: 4
+CPU-1 que1(priority-0) (FCFS)→
+Process ID: P2, Arrival Time: 1, Priority: 0, Burst Time: 0, RAM: 50, CPU Rate: 6, Remaining Time: 1
+Process ID: P4, Arrival Time: 1, Priority: 0, Burst Time: 0, RAM: 65, CPU Rate: 2, Remaining Time: 3
+Process ID: P7, Arrival Time: 2, Priority: 0, Burst Time: 0, RAM: 55, CPU Rate: 12, Remaining Time: 4
+Process ID: P8, Arrival Time: 2, Priority: 0, Burst Time: 0, RAM: 7, CPU Rate: 8, Remaining Time: 4
+Process ID: P9, Arrival Time: 3, Priority: 0, Burst Time: 0, RAM: 28, CPU Rate: 20, Remaining Time: 2
+Process ID: P11, Arrival Time: 5, Priority: 0, Burst Time: 0, RAM: 28, CPU Rate: 2, Remaining Time: 3
+Process ID: P17, Arrival Time: 11, Priority: 0, Burst Time: 0, RAM: 62, CPU Rate: 20, Remaining Time: 4
+Process ID: P18, Arrival Time: 12, Priority: 0, Burst Time: 0, RAM: 33, CPU Rate: 6, Remaining Time: 4
+Process ID: P20, Arrival Time: 15, Priority: 0, Burst Time: 0, RAM: 40, CPU Rate: 12, Remaining Time: 4
 
-CPU-2 que2(priority-1) (SJF)→Process ID: P, Arrival Time: 0, Priority: 1, Burst Time: 0, RAM: 574, CPU Rate: 4, Remaining Time: 2
-Process ID: P, Arrival Time: 8, Priority: 1, Burst Time: 0, RAM: 78, CPU Rate: 8, Remaining Time: 4
-Process ID: P, Arrival Time: 25, Priority: 1, Burst Time: 0, RAM: 1074, CPU Rate: 6, Remaining Time: 2
-Process ID: P, Arrival Time: 36, Priority: 1, Burst Time: 0, RAM: 351, CPU Rate: 2, Remaining Time: 2
+CPU-2 que2(priority-1) (SJF)→
+Process ID: P1, Arrival Time: 0, Priority: 1, Burst Time: 0, RAM: 574, CPU Rate: 4, Remaining Time: 2
+Process ID: P15, Arrival Time: 8, Priority: 1, Burst Time: 0, RAM: 78, CPU Rate: 8, Remaining Time: 4
+Process ID: P14, Arrival Time: 25, Priority: 1, Burst Time: 0, RAM: 1074, CPU Rate: 6, Remaining Time: 2
+Process ID: P25, Arrival Time: 36, Priority: 1, Burst Time: 0, RAM: 351, CPU Rate: 2, Remaining Time: 2
 
-CPU-2 que3(priority-2) (RR-q8)→Process ID: P, Arrival Time: 3, Priority: 2, Burst Time: 0, RAM: 625, CPU Rate: 3, Remaining Time: 2
-Process ID: P, Arrival Time: 5, Priority: 2, Burst Time: 0, RAM: 765, CPU Rate: 18, Remaining Time: 3
-Process ID: P, Arrival Time: 10, Priority: 2, Burst Time: 0, RAM: 832, CPU Rate: 4, Remaining Time: 4
-Process ID: P, Arrival Time: 27, Priority: 2, Burst Time: 0, RAM: 457, CPU Rate: 8, Remaining Time: 3
-Process ID: P, Arrival Time: 36, Priority: 2, Burst Time: 0, RAM: 759, CPU Rate: 36, Remaining Time: 2
+CPU-2 que3(priority-2) (RR-q8)→
+Process ID: P5, Arrival Time: 3, Priority: 2, Burst Time: 0, RAM: 625, CPU Rate: 3, Remaining Time: 2
+Process ID: P6, Arrival Time: 5, Priority: 2, Burst Time: 0, RAM: 765, CPU Rate: 18, Remaining Time: 3
+Process ID: P10, Arrival Time: 10, Priority: 2, Burst Time: 0, RAM: 832, CPU Rate: 4, Remaining Time: 4
+Process ID: P23, Arrival Time: 27, Priority: 2, Burst Time: 0, RAM: 457, CPU Rate: 8, Remaining Time: 3
+Process ID: P19, Arrival Time: 36, Priority: 2, Burst Time: 0, RAM: 759, CPU Rate: 36, Remaining Time: 2
 
-CPU-2 que4(priority-3) (RR-q16)→Process ID: P, Arrival Time: 1, Priority: 3, Burst Time: 0, RAM: 515, CPU Rate: 8, Remaining Time: 2
-Process ID: P, Arrival Time: 7, Priority: 3, Burst Time: 0, RAM: 158, CPU Rate: 4, Remaining Time: 2
-Process ID: P, Arrival Time: 16, Priority: 3, Burst Time: 0, RAM: 100, CPU Rate: 4, Remaining Time: 3
-Process ID: P, Arrival Time: 18, Priority: 3, Burst Time: 0, RAM: 853, CPU Rate: 2, Remaining Time: 2
-Process ID: P, Arrival Time: 18, Priority: 3, Burst Time: 0, RAM: 379, CPU Rate: 16, Remaining Time: 2
-Process ID: P, Arrival Time: 29, Priority: 3, Burst Time: 0, RAM: 1017, CPU Rate: 24, Remaining Time: 4
-Process ID: P, Arrival Time: 32, Priority: 3, Burst Time: 0, RAM: 417, CPU Rate: 4, Remaining Time: 2
+CPU-2 que4(priority-3) (RR-q16)→
+Process ID: P3, Arrival Time: 1, Priority: 3, Burst Time: 0, RAM: 515, CPU Rate: 8, Remaining Time: 2
+Process ID: P13, Arrival Time: 7, Priority: 3, Burst Time: 0, RAM: 158, CPU Rate: 4, Remaining Time: 2
+Process ID: P21, Arrival Time: 16, Priority: 3, Burst Time: 0, RAM: 100, CPU Rate: 4, Remaining Time: 3
+Process ID: P12, Arrival Time: 18, Priority: 3, Burst Time: 0, RAM: 853, CPU Rate: 2, Remaining Time: 2
+Process ID: P22, Arrival Time: 18, Priority: 3, Burst Time: 0, RAM: 379, CPU Rate: 16, Remaining Time: 2
+Process ID: P16, Arrival Time: 29, Priority: 3, Burst Time: 0, RAM: 1017, CPU Rate: 24, Remaining Time: 4
+Process ID: P24, Arrival Time: 32, Priority: 3, Burst Time: 0, RAM: 417, CPU Rate: 4, Remaining Time: 2
 
 MS= 41

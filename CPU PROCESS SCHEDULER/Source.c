@@ -5,7 +5,7 @@
 #include <stdbool.h>
 
 //defining const variables
-#define MAX_PROCESSES 26
+#define MAX_PROCESSES 50
 #define RAM_SIZE 2048
 #define HIGH_PRIORITY_RAM 512
 #define USER_PROCESS_RAM (RAM_SIZE - HIGH_PRIORITY_RAM)
@@ -25,7 +25,7 @@ int q; //temporary quantum clock for every rr operation
 
 
 typedef struct {
-    char process_id[2];
+    int process_id;
     int arrival_time;
     int priority;
     int burst_time;
@@ -140,13 +140,13 @@ int main(int argc, char* argv[]) {
     // info
     printf("All tasks are completed\n");
 
-    printf("CPU-1 que1(priority-0) (FCFS)→");
+    printf("CPU-1 que1(priority-0) (FCFS)→\n");
     displayQueue(&qf_fcfs);
-    printf("CPU-2 que2(priority-1) (SJF)→");
+    printf("CPU-2 que2(priority-1) (SJF)→\n");
     displayQueue(&qf_sjf);
-    printf("CPU-2 que3(priority-2) (RR-q8)→");
+    printf("CPU-2 que3(priority-2) (RR-q8)→\n");
     displayQueue(&qf_rr8);
-    printf("CPU-2 que4(priority-3) (RR-q16)→");
+    printf("CPU-2 que4(priority-3) (RR-q16)→\n");
     displayQueue(&qf_rr16);
 
     printf("MS= %d", count);
@@ -167,11 +167,11 @@ bool checkResources(Process process) {
 
         if ((cHigh + process.ram) <= HIGH_PRIORITY_RAM && (cCPU1 + process.cpu_rate) <= MAX_CPU1) {
             
-            printf("resources are enough\n" );
+            printf("resources are enough for P%d\n", process.process_id );
             return 1;
         }
         else {
-            printf("resources are not enough\n");
+            printf("resources are not enough for P%d\n", process.process_id);
 
             return 0;
         }
@@ -181,11 +181,11 @@ bool checkResources(Process process) {
 
         if (cUser + process.ram <= USER_PROCESS_RAM && cCPU2 + process.cpu_rate <= MAX_CPU2) {
            
-            printf("resources are enough\n");
+            printf("resources are enough for P%d\n", process.process_id);
             return 1;
         }
         else {
-            printf("resources are not enough\n");
+            printf("resources are not enough for P%d\n", process.process_id);
             return 0;
         }
 
@@ -217,12 +217,10 @@ int readFile(char* filename) {
             continue;
         }
 
-        char processName[2]; //ilk elemanı doğru okumuyor
+        processes[n].process_id = n + 1;
+
         char* token = strtok(line, ",");
-        if (token != NULL) {
-            strncpy(processName, token, sizeof(processName) - 1);
-            processName[sizeof(processName) - 1] = '\0'; // Ensure null termination????????
-        }
+        
         
         processes[n].arrival_time = atoi(strtok(NULL, ","));
         processes[n].priority = atoi(strtok(NULL, ","));
@@ -232,9 +230,7 @@ int readFile(char* filename) {
         processes[n].r_time = processes[n].burst_time;
 
 
-        for (int i = 0; i < 2; i++) {
-            processes[n].process_id[i] = processName[i]; // Format process ID as P1, P2, etc.
-        }
+        
 
         n++;
 
@@ -261,7 +257,7 @@ void scheduleProcesses() {
 
                 if (checkResources(processes[i]) == 1) {
 
-                    printf("high\n");
+                    printf("fcfs\n");
 
                     //allocating resources for chosen process
                     cHigh = cHigh + processes[i].ram; 
@@ -269,14 +265,14 @@ void scheduleProcesses() {
 
                     enqueue(&q_fcfs, processes[i]); //enqueue
 
-                    printf("Process %d is queued to be assigned to CPU-1.\n\n", processes[i].process_id[0]);
+                    printf("Process P%d is queued to be assigned to CPU-1.\n\n", processes[i].process_id);
                 }
                 else {
 
                     processes[i].arrival_time++; 
                     
                     //no resources so delaying arrival time for future queue 
-                    printf("high\n");
+                    printf("fcfs\n");
                     printf("arrival time delayed\n\n");
                 }
 
@@ -293,7 +289,7 @@ void scheduleProcesses() {
                     cCPU2 = cCPU2 + processes[i].cpu_rate;
 
                     enqueue(&q_sjf, processes[i]);
-                    printf("Process %d is queued to be assigned to CPU-2.\n\n", processes[i].process_id[0]);
+                    printf("Process P%d is queued to be assigned to CPU-2.\n\n", processes[i].process_id);
                 }
                 else {
                     processes[i].arrival_time++;
@@ -308,7 +304,7 @@ void scheduleProcesses() {
                     cCPU2 = cCPU2 + processes[i].cpu_rate;
 
                     enqueue(&q_rr8, processes[i]);
-                    printf("Process %d is queued to be assigned to CPU-2.\n\n", processes[i].process_id[0]);
+                    printf("Process P%d is queued to be assigned to CPU-2.\n\n", processes[i].process_id);
                 }
                 else {
                     processes[i].arrival_time++;
@@ -324,7 +320,7 @@ void scheduleProcesses() {
                     cCPU2 = cCPU2 + processes[i].cpu_rate;
 
                     enqueue(&q_rr16, processes[i]);
-                    printf("Process %d is queued to be assigned to CPU-2.\n\n", processes[i].process_id[0]);
+                    printf("Process P%d is queued to be assigned to CPU-2.\n\n", processes[i].process_id);
                 }
                 else {
                     processes[i].arrival_time++;
@@ -391,7 +387,7 @@ void CPU1() {
 
         if (one.burst_time == 0 && isEmpty(&q_fcfs) == 0) { //if process is completed and there is a process in queue 
 
-            printf("Process %d is completed and terminated in CPU1.\n\n", one.process_id[0]);
+            printf("Process P%d is completed and terminated in CPU1.\n\n", one.process_id);
             
             //deallocating memory and cpu
             cHigh = cHigh - one.ram;
@@ -401,13 +397,13 @@ void CPU1() {
 
             one = dequeue(&q_fcfs); //assigning new process in cpu
 
-            printf("Process %d is assigned in CPU1.\n\n", one.process_id[0]);
+            printf("Process P%d is assigned in CPU1.\n\n", one.process_id);
 
 
         }
         else if(one.burst_time == 0){
 
-            printf("Process %d is completed and terminated in CPU1.\n\n", one.process_id[0]);
+            printf("Process P%d is completed and terminated in CPU1.\n\n", one.process_id);
 
             cHigh = cHigh - one.ram;
             cCPU1 = cCPU1 - one.cpu_rate;
@@ -421,7 +417,7 @@ void CPU1() {
         
             one = dequeue(&q_fcfs);//for first assignment
 
-            printf("Process %d is assigned in CPU1.\n\n", one.process_id[0]);
+            printf("Process P%d is assigned in CPU1.\n\n", one.process_id);
         
     }
 
@@ -437,7 +433,7 @@ void CPU2S() {
 
         two = dequeue(&q_sjf); //assigning process in cpu
 
-        printf("Process %d is assigned in CPU2.\n\n", two.process_id[0]);
+        printf("Process P%d is assigned in CPU2.\n\n", two.process_id);
     }
     else if (isEmpty(&q_rr8) == 0) {
 
@@ -445,7 +441,7 @@ void CPU2S() {
 
         two = dequeue(&q_rr8);//assigning process in cpu
 
-        printf("Process %d is assigned in CPU2.\n\n", two.process_id[0]);
+        printf("Process P%d is assigned in CPU2.\n\n", two.process_id);
     }
     else if (isEmpty(&q_rr16) == 0) {
 
@@ -453,7 +449,7 @@ void CPU2S() {
 
         two = dequeue(&q_rr16);//assigning process in cpu
 
-        printf("Process %d is assigned in CPU2.\n\n", two.process_id[0]);
+        printf("Process P%d is assigned in CPU2.\n\n", two.process_id);
     }
 
 
@@ -469,7 +465,7 @@ void CPU2() {
 
         if (two.burst_time == 0) { //if process is completed 
 
-            printf("Process %d is completed and terminated in CPU2.\n\n", two.process_id[0]);
+            printf("Process P%d is completed and terminated in CPU2.\n\n", two.process_id);
 
             
 
@@ -492,13 +488,13 @@ void CPU2() {
 
         if (q==0) { // if process completed by defined q time 
 
-            printf("Process %d run until the defined quantum time and is queued again because the process is not completed. \n\n", two.process_id[0]);
+            printf("Process P%d run until the defined quantum time and is queued again because the process is not completed. \n\n", two.process_id);
             enqueue(&q_rr8,two); //requeue process
             CPU2S(); //assign new process 
 
         }else if (two.burst_time == 0){ //if process is completed 
 
-            printf("Process %d is completed and terminated in CPU2.\n\n", two.process_id[0]);
+            printf("Process P%d is completed and terminated in CPU2.\n\n", two.process_id);
 
             //deallocating resources
 
@@ -518,7 +514,7 @@ void CPU2() {
 
         if (q == 0) {
 
-            printf("Process %d run until the defined quantum time and is queued again because the process is not completed. \n\n", two.process_id[0]);
+            printf("Process P%d run until the defined quantum time and is queued again because the process is not completed. \n\n", two.process_id);
             enqueue(&q_rr8, two);
 
             CPU2S();
@@ -526,7 +522,7 @@ void CPU2() {
         }
         else if (two.burst_time == 0) {
 
-            printf("Process %d is completed and terminated in CPU2.\n\n", two.process_id[0]);
+            printf("Process P%d is completed and terminated in CPU2.\n\n", two.process_id);
             cUser = cUser - two.ram;
             cCPU2 = cCPU2 - two.cpu_rate;
 
@@ -600,7 +596,7 @@ void displayQueue(Queue* queue) {
 
     Node* temp = queue->front;
     while (temp != NULL) {
-        printf("Process ID: %s, Arrival Time: %d, Priority: %d, Burst Time: %d, RAM: %d, CPU Rate: %d, Remaining Time: %d\n",
+        printf("Process ID: P%d, Arrival Time: %d, Priority: %d, Burst Time: %d, RAM: %d, CPU Rate: %d, Remaining Time: %d\n",
             temp->data.process_id, temp->data.arrival_time, temp->data.priority, temp->data.burst_time,
             temp->data.ram, temp->data.cpu_rate, temp->data.r_time);
         temp = temp->next;
