@@ -7,6 +7,7 @@ Queue-based Scheduling:
 -FCFS (First Come, First Serve): High-priority processes are handled using a straightforward queue.
 -SJF (Shortest Job First): Optimized for low-priority processes to reduce average waiting time.
 -Round Robin (RR): Time-sharing for processes with quantum values of 8 ms and 16 ms.
+
 ## Resource Management
 
 -RAM and CPU usage are dynamically allocated and deallocated.
