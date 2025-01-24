@@ -38,8 +38,11 @@ process_id,arrival_time,priority,burst_time,ram,cpu_rate
 ## Key Functions
 
 -readFile(): Reads processes from the input file and initializes them.
+
 -scheduleProcesses(): Assigns processes to the appropriate scheduling queue based on priority and resource availability.
+
 -CPU1() and CPU2(): Execute processes based on the assigned CPU.
+
 -displayQueue(): Outputs the current state of a queue.
 
 ## How to Use
@@ -47,11 +50,13 @@ process_id,arrival_time,priority,burst_time,ram,cpu_rate
 -Clone this repository.
 
 ### Compile the code using a C compiler:
+
 -bash:
 
  gcc -o scheduler scheduler.c
  
  ### Run the executable:
+ 
 -bash:
 
  ./scheduler
@@ -61,10 +66,15 @@ process_id,arrival_time,priority,burst_time,ram,cpu_rate
 -Example Input
 
 input.txt:
+
 1,0,0,5,100,20
+
 2,1,1,10,200,30
+
 3,2,2,8,150,25
+
 4,3,3,12,180,35
 
 Example Output:
+
 Check output.txt for detailed execution logs and final process states.
