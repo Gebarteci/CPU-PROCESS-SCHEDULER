@@ -7,12 +7,12 @@ Queue-based Scheduling:
 -FCFS (First Come, First Serve): High-priority processes are handled using a straightforward queue.
 -SJF (Shortest Job First): Optimized for low-priority processes to reduce average waiting time.
 -Round Robin (RR): Time-sharing for processes with quantum values of 8 ms and 16 ms.
-##Resource Management:
+## Resource Management
 
 -RAM and CPU usage are dynamically allocated and deallocated.
 -Processes requiring more resources than available are queued or marked as "impossible."
 
-## Process Management:
+## Process Management
 
 -Processes are read from an input file (input.txt) and include attributes such as arrival time, priority, burst time, RAM, and CPU rate.
 -The system continuously schedules processes until all are completed or marked as "impossible."
@@ -37,7 +37,7 @@ process_id,arrival_time,priority,burst_time,ram,cpu_rate
 -CPU1() and CPU2(): Execute processes based on the assigned CPU.
 -displayQueue(): Outputs the current state of a queue.
 
-##How to Use
+## How to Use
 
 -Clone this repository.
 -Compile the code using a C compiler:
