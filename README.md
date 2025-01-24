@@ -13,11 +13,13 @@ Queue-based Scheduling:
 ## Resource Management
 
 -RAM and CPU usage are dynamically allocated and deallocated.
+
 -Processes requiring more resources than available are queued or marked as "impossible."
 
 ## Process Management
 
 -Processes are read from an input file (input.txt) and include attributes such as arrival time, priority, burst time, RAM, and CPU rate.
+
 -The system continuously schedules processes until all are completed or marked as "impossible."
 
 ## How It Works
@@ -31,7 +33,7 @@ process_id,arrival_time,priority,burst_time,ram,cpu_rate
 
 ### CPU-2 handles lower-priority processes (SJF and RR).
 
--Output: Execution logs and final process states are saved in output.txt.
+###Output: Execution logs and final process states are saved in output.txt.
 
 ## Key Functions
 
@@ -43,12 +45,15 @@ process_id,arrival_time,priority,burst_time,ram,cpu_rate
 ## How to Use
 
 -Clone this repository.
--Compile the code using a C compiler:
--bash:
- gcc -o scheduler scheduler.c
- Run the executable:
 
+### Compile the code using a C compiler:
 -bash:
+
+ gcc -o scheduler scheduler.c
+ 
+ ### Run the executable:
+-bash:
+
  ./scheduler
 
 -Provide an input.txt file in the working directory containing process details.
