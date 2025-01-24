@@ -19,14 +19,14 @@ Queue-based Scheduling:
 
 ## How It Works
 
-###Input: Processes are read from input.txt in the format:
+### Input: Processes are read from input.txt in the format:
 process_id,arrival_time,priority,burst_time,ram,cpu_rate
 
-###Scheduling: Processes are assigned to CPUs based on their priority:
+### Scheduling: Processes are assigned to CPUs based on their priority:
 
-###CPU-1 handles high-priority processes (FCFS).
+### CPU-1 handles high-priority processes (FCFS).
 
-###CPU-2 handles lower-priority processes (SJF and RR).
+### CPU-2 handles lower-priority processes (SJF and RR).
 
 -Output: Execution logs and final process states are saved in output.txt.
 
